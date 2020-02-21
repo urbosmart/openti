@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+    <record id="commissions_tree" model="ir.ui.view">
+      <field name="name">Comisiones</field>
+      <field name="model">commissions.invoice.clearence</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="Glosa"/>
+          <field name="ValComNeto"/>
+        </tree>
+      </field>
+    </record>
+  </data>
+</odoo>

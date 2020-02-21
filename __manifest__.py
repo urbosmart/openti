@@ -19,14 +19,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'website_sale'],
+    'depends': ['base', 'website_sale','l10n_cl_fe','l10n_cl_stock_picking'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        # 'data/payment_cron.xml',
+        'security/ir.model.access.csv',
+        # 'demo/payment_cron.xml',
         'views/views.xml',
         'views/templates.xml',
+        'views/commissions_invoice_clearence.xml',
+        'views/account_invoice.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
