@@ -12,3 +12,8 @@ class StockPickingInherit(models.Model):
 
     def set_use_document(self):
         return True
+
+    use_documents = fields.Boolean(
+            string='Use Documents?',
+            default=set_use_document,
+        )
