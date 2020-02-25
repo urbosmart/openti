@@ -33,7 +33,7 @@ try:
 except ImportError:
     _logger.info('Cannot import base64 library')
 
-class POSInherit(models.Model):
+class POS(models.Model):
     _inherit = 'pos.order'
     def _id_doc(self, taxInclude=False, MntExe=0):
         util_model = self.env['cl.utils']
