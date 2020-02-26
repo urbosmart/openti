@@ -155,8 +155,7 @@ class ConsumoFolios(models.Model):
             "Documento": [{'TipoDTE': k, 'documentos': v} for k, v in grupos.items()]
         }
         datos['test'] = True
-        import pdb; pdb.set_trace()
-        result = fe.libro(datos)[0]
+        result = fe.consumo_folios(datos)[0]
         envio_dte = result['sii_xml_request']
         doc_id = '%s_%s' % (self.tipo_operacion, self.periodo_tributario)
         self.sii_xml_request = self.env['sii.xml.envio'].create({
