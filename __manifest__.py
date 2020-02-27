@@ -31,8 +31,6 @@
         'demo/payment_cron.xml',
         'demo/default_barcode_patterns.xml',
         #'demo/stock_data.xml',
-        'views/views.xml',
-        'views/templates.xml',
         'views/commissions_invoice_clearence.xml',
         'views/account_invoice.xml',
     ],
