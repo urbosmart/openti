@@ -23,6 +23,63 @@ except Exception as e:
 class ConsumoFolios(models.Model):
     _inherit = "account.move.consumo_folios"
 
+    tipo_operacion = fields.Selection([('utilizados','Utilizados'), ('anulados','Anulados')])
+    periodo_tributario = fields.Char(
+            string='Periodo Tributario',
+            required=True,
+            readonly=True,
+            states={'draft': [('readonly', False)]},
+            default=lambda *a: datetime.now().strftime('%Y-%m'),
+        )
+    impuestos = fields.One2many(
+        'account.move.consumo_folios.impuestos',
+       'cf_id',
+       string="Detalle Impuestos",
+       readonly=True,
+       states={'draft': [('readonly', False)]},)
+    sec_envio = fields.Integer(
+        string="Secuencia de Envío",
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    fecha_inicio = fields.Date(
+        string="Fecha Inicio",
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        default=lambda self: fields.Date.context_today(self),
+    )
+    total_neto = fields.Monetary(
+        string="Total Neto",
+        store=True,
+        readonly=True,
+        compute='get_totales',)
+    total_iva = fields.Monetary(
+        string="Total Iva",
+        store=True,
+        readonly=True,
+        compute='get_totales',)
+    total_exento = fields.Monetary(
+        string="Total Exento",
+        store=True,
+        readonly=True,
+        compute='get_totales',)
+    total = fields.Monetary(
+        string="Monto Total",
+        store=True,
+        readonly=True,
+        compute='get_totales',)
+    total_boletas = fields.Integer(
+        string="Total Boletas",
+        store=True,
+        readonly=True,
+        compute='get_totales',)
+    detalles = fields.One2many(
+        'account.move.consumo_folios.detalles',
+       'cf_id',
+       string="Detalle Rangos",
+       readonly=True,
+       states={'draft': [('readonly', False)]},)
+
     def _get_moves(self):
         recs = super(cfpo, self)._get_moves()
         current = self.fecha_inicio.strftime(DTF) #+ ' 00:00:00'
@@ -80,6 +137,7 @@ class ConsumoFolios(models.Model):
     @api.onchange('move_ids', 'anulaciones')
     def _resumenes(self):
         resumenes = self._get_resumenes()
+
         if self.impuestos and isinstance(self.id, int):
             self._cr.execute("DELETE FROM account_move_consumo_folios_impuestos WHERE cf_id=%s", (self.id,))
             self.invalidate_cache()
@@ -147,14 +205,19 @@ class ConsumoFolios(models.Model):
             raise UserError("terminar código anulaciones manuales")
             grupos.setdefault(r.document_class_id.sii_code, [])
             grupos[r.document_class_id.sii_code].append(r)
-        datos['ConsumoFolios'] = {
+        datos['ConsumoFolios'] = [{
             "FchInicio": self.fecha_inicio,
             "FchFinal": self.fecha_final,
             "SecEnvio": self.sec_envio,
             "Correlativo": self.correlativo,
             "Documento": [{'TipoDTE': k, 'documentos': v} for k, v in grupos.items()]
-        }
+        }]
         datos['test'] = True
+        ###################################################################
+        #                                                                 #
+        #######AttributeError: 'str' object has no attribute 'items'#######
+        #                                                                 #
+        ###################################################################
         result = fe.consumo_folios(datos)[0]
         envio_dte = result['sii_xml_request']
         doc_id = '%s_%s' % (self.tipo_operacion, self.periodo_tributario)
@@ -163,3 +226,68 @@ class ConsumoFolios(models.Model):
             'name': doc_id,
             'company_id': self.company_id.id,
         }).id
+
+    @api.onchange('fecha_inicio', 'company_id', 'fecha_final')
+    def set_data(self):
+        if self.fecha_inicio > fields.Date.context_today(self):
+            raise UserError("No puede hacer Consumo de Folios de días futuros")
+        self.name = self.fecha_inicio
+        self.fecha_final = self.fecha_inicio
+        self.move_ids = self.env['account.move'].search([
+            ('document_class_id.sii_code', 'in', [39, 41]),
+            ('sended','=', False),
+            ('date', '=', self.fecha_inicio),
+            ('company_id', '=', self.company_id.id),
+            ]).ids
+        # self.fecha_inicio = datetime.date(2020, 2, 28)
+        # self.company_id.id = 1
+        consumos = self.env['account.move.consumo_folios'].search_count([
+            ('fecha_inicio', '=', self.fecha_inicio),
+            ('state', 'not in', ['draft', 'Rechazado']),
+            ('company_id', '=', self.company_id.id),
+            ])
+        if consumos >= 0:
+            self.sec_envio = (consumos+1)
+        self._resumenes()
+
+    @api.onchange('impuestos')
+    @api.depends('impuestos')
+    def get_totales(self):
+        for r in self:
+            total_iva = 0
+            total_exento = 0
+            total = 0
+            total_boletas = 0
+            for d in r.impuestos:
+                total_iva += d.monto_iva
+                total_exento += d.monto_exento
+                total += d.monto_total
+            if r.detalles:
+                _logger.warning("#########################################################################")
+                _logger.warning("#########################################################################")
+                _logger.warning("there are r.detalles")
+                _logger.warning("#########################################################################")
+                _logger.warning("#########################################################################")
+                for d in r.detalles:
+                    if d.tpo_doc.sii_code in [39, 41] and d.tipo_operacion == "utilizados":
+                        total_boletas += d.cantidad
+            else:
+                _logger.warning("#########################################################################")
+                _logger.warning("#########################################################################")
+                _logger.warning("dont have r.detalles")
+                _logger.warning("#########################################################################")
+                _logger.warning("#########################################################################")
+            r.total_neto = total - total_iva - total_exento
+            r.total_iva = total_iva
+            r.total_exento = total_exento
+            r.total = total
+            r.total_boletas = total_boletas
+
+
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+################################ Original files above ######################################
+####################################################################################################
+####################################################################################################
