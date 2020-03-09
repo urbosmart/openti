@@ -1,0 +1,72 @@
+<odoo>
+  <data>
+
+    <!-- plantilla para la cabecera de los documentos -->
+    <template id="report_boleta_header_layout_openti" inherit_id="l10n_cl_dte_point_of_sale.report_boleta_header_layout">
+      <xpath expr="//div[@id='header']" position="replace">
+<!--
+      <div class="row" id="header">
+    -->
+        <div class="col-xs-12 text-center">
+          <t t-set="logo" t-value="o.company_id.partner_id.image"/>
+          <img t-if="logo" t-att-src="'data:image/png;base64,%s' % to_text(logo)" style="max-height: 45px;"/>
+          <br />
+          <h4>
+            <span t-esc="o.company_id.partner_id.name" />
+          </h4>
+          <h4>
+            <span t-esc="o.company_id.partner_id.document_number" />
+          </h4>
+        </div>
+        <div class="col-xs-12 text-center">
+          <h7 t-field="o.company_id.activity_description" />
+        </div>
+        <div class="col-xs-12 text-center">
+          <h7>
+            <span t-esc="o.company_id.partner_id.street" />
+            <span t-esc="o.company_id.partner_id.city" />
+          </h7>
+        </div>
+        <div class="col-xs-12 text-center" t-if="o.document_class_id">
+          <h7>
+            <span t-field="o.document_class_id.name" />
+            N°:
+            <span t-field="o.sii_document_number" />
+          </h7>
+        </div>
+<!--
+      </div>
+-->
+      </xpath>
+    </template>
+
+    <!-- plantilla para el barcode del sii -->
+    <template id="report_boleta_sii_barcode_layout_openti" inherit_id="l10n_cl_dte_point_of_sale.report_boleta_sii_barcode_layout">
+      <xpath expr="//div[@id='barcode']" position="replace">
+
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <span>
+              <img t-att-src="'data:image/png;base64,%s' % to_text(o.sii_barcode_img)"
+                style="width: 100%" t-att-widget="'image'" />
+            </span>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <p style="text-align:center;color:red; font-size:8px;">
+              Timbre Electrónico SII
+              <br />
+              Verifique documento:
+              Resolución
+              <t t-esc='o.company_id.dte_resolution_number' />
+              de
+              <t t-esc="o.company_id.dte_resolution_date.year"/>
+              <t t-if="o.document_class_id.sii_code in [ 61 ]" t-esc="'www.sii.cl'"/>
+              <t t-if="o.document_class_id.sii_code not in [ 61 ]" t-esc="o.company_id.website + '/boleta/' + str(o.sii_document_number)" />
+            </p>
+          </div>
+
+      </xpath>
+    </template>
+
+  </data>
+</odoo>

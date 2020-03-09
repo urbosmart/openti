@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <record model="ir.cron" id="cron_post_process_payment_tx">
+  <record model="ir.cron" id="payment.cron_post_process_payment_tx">
     <field name="name">Post process payment transactions</field>
     <field name="model_id" ref="payment.model_payment_transaction"/>
     <field name="state">code</field>

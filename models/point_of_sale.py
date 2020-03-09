@@ -35,6 +35,7 @@ except ImportError:
 
 class POS(models.Model):
     _inherit = 'pos.order'
+
     def _id_doc(self, taxInclude=False, MntExe=0):
         util_model = self.env['cl.utils']
         fields_model = self.env['ir.fields.converter']

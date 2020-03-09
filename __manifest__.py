@@ -24,18 +24,21 @@
         'l10n_cl_dte_point_of_sale',
         'l10n_cl_stock_picking',
     ],
-
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/inherit_report_paperformat.xml',
         'demo/payment_cron.xml',
-        'demo/default_barcode_patterns.xml',
-        #'demo/stock_data.xml',
+        # 'demo/default_barcode_patterns.xml',
+        # 'demo/stock_data.xml',
+        'report/inherit_invoice_layout.xml',
+        'report/inherit_report_pos_common_templates.xml',
         'views/commissions_invoice_clearence.xml',
         'views/account_invoice.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo.xml',
+    ],
+    'qweb':[
     ],
 }
