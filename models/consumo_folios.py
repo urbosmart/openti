@@ -123,6 +123,7 @@ class ConsumoFolios(models.Model):
                         }
                     }
                 })
+
         datos = {
             "resumen": False,
             "FchInicio": self.fecha_inicio,
@@ -200,13 +201,13 @@ class ConsumoFolios(models.Model):
         recs = self._get_moves()
         for r in recs:
             grupos.setdefault(r.document_class_id.sii_code, [])
-            grupos[r.document_class_id.sii_code].append(r)
+            grupos[r.document_class_id.sii_code].append(r.with_context(tax_detail=True)._dte())
         for anulaciones in self.anulaciones:
             raise UserError("terminar código anulaciones manuales")
             grupos.setdefault(r.document_class_id.sii_code, [])
             grupos[r.document_class_id.sii_code].append(r)
         datos['ConsumoFolios'] = [{
-            "FchInicio": self.fecha_inicio,
+            "FchInicio": self.fecha_inicio.strftime("%Y-%m-%d"),
             "FchFinal": self.fecha_final,
             "SecEnvio": self.sec_envio,
             "Correlativo": self.correlativo,
@@ -262,32 +263,11 @@ class ConsumoFolios(models.Model):
                 total_iva += d.monto_iva
                 total_exento += d.monto_exento
                 total += d.monto_total
-            if r.detalles:
-                _logger.warning("#########################################################################")
-                _logger.warning("#########################################################################")
-                _logger.warning("there are r.detalles")
-                _logger.warning("#########################################################################")
-                _logger.warning("#########################################################################")
-                for d in r.detalles:
-                    if d.tpo_doc.sii_code in [39, 41] and d.tipo_operacion == "utilizados":
-                        total_boletas += d.cantidad
-            else:
-                _logger.warning("#########################################################################")
-                _logger.warning("#########################################################################")
-                _logger.warning("dont have r.detalles")
-                _logger.warning("#########################################################################")
-                _logger.warning("#########################################################################")
+            for d in r.detalles:
+                if d.tpo_doc.sii_code in [39, 41] and d.tipo_operacion == "utilizados":
+                    total_boletas += d.cantidad
             r.total_neto = total - total_iva - total_exento
             r.total_iva = total_iva
             r.total_exento = total_exento
             r.total = total
             r.total_boletas = total_boletas
-
-
-
-####################################################################################################
-####################################################################################################
-####################################################################################################
-################################ Original files above ######################################
-####################################################################################################
-####################################################################################################

@@ -8,7 +8,12 @@
           <field name="inherit_id" ref="l10n_cl_fe.view_invoice_form" />
           <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='journal_id']" position="after">
+            <!-- <xpath expr="//field[@name='journal_id']" position="after">
+              <field name="commissions"/>
+            </xpath> -->
+            
+            <!-- For the momment the field ticket are duplicated-->
+            <xpath expr="//field[@name='ticket']" position="replace">
               <field name="commissions"/>
             </xpath>
 

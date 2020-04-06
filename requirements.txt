@@ -1,2 +1,5 @@
-#facturacion_electronica==0.8.2
+xmlsec
+xmltodict
+dicttoxml
+py-wsse
 fe_openti

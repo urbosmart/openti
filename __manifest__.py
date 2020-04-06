@@ -21,8 +21,11 @@
     # any module necessary for this one to work correctly
     'depends': [
         'website_sale',
+        'l10n_cl_fe',
         'l10n_cl_dte_point_of_sale',
         'l10n_cl_stock_picking',
+        'payment_webpay',
+        'payment_khipu',
     ],
     # always loaded
     'data': [
