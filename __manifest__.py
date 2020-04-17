@@ -26,6 +26,8 @@
         'l10n_cl_stock_picking',
         'payment_webpay',
         'payment_khipu',
+        'tecnopti',
+        'web_responsive',
     ],
     # always loaded
     'data': [
@@ -44,4 +46,5 @@
     ],
     'qweb':[
     ],
+    'application': True,
 }
