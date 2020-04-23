@@ -17,7 +17,6 @@
     # for the full list
     'category': 'Uncategorized',
     'version': '0.1',
-
     # any module necessary for this one to work correctly
     'depends': [
         'website_sale',
@@ -40,11 +39,13 @@
         'report/inherit_report_pos_common_templates.xml',
         'views/commissions_invoice_clearence.xml',
         'views/account_invoice.xml',
+        'views/tiendas.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
     ],
     'qweb':[
     ],
+    'auto_install': True,
     'application': True,
 }

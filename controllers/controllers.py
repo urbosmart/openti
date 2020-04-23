@@ -19,3 +19,12 @@ class CustomWebsiteSale(WebsiteSale):
                 payment._post_process_after_done()
 
         return request.redirect(order.access_url)
+
+    # Pagina para tiendas
+
+    @http.route('/tiendas/', auth='public')
+    def index(self, **kw):
+        Companies = http.request.env['res.company']
+        return http.request.render('openti.tiendas', {
+            'companies': Companies.search([])
+        })

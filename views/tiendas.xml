@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+
+    <template id="tiendas">
+          <title>Tiendas</title>
+
+          <t t-foreach="companies" t-as="company">
+              <p><t t-esc="company.id"/> <t t-esc="company.name"/></p>
+          </t>
+
+      </template>
+
+  </data>
+</odoo>
