@@ -22,7 +22,7 @@ class CustomWebsiteSale(WebsiteSale):
 
     # Pagina para tiendas
 
-    @http.route('/tiendas/', auth='public')
+    @http.route('/tiendas/', auth='public', website=True)
     def index(self, **kw):
         Companies = http.request.env['res.company']
         return http.request.render('openti.tiendas', {

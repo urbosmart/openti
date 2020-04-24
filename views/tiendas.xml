@@ -1,14 +1,14 @@
 <odoo>
   <data>
-
     <template id="tiendas">
+      <t t-call="website.layout">
           <title>Tiendas</title>
 
           <t t-foreach="companies" t-as="company">
               <p><t t-esc="company.id"/> <t t-esc="company.name"/></p>
           </t>
-
-      </template>
+       </t>    
+    </template>
 
   </data>
 </odoo>
