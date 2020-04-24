@@ -5,3 +5,4 @@ from . import commissions
 from . import stock_picking
 from . import consumo_folios
 from . import point_of_sale
+from . import ks_res_config_setting

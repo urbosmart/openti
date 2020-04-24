@@ -40,6 +40,7 @@
         'views/commissions_invoice_clearence.xml',
         'views/account_invoice.xml',
         'views/tiendas.xml',
+        'views/res_config_setting.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
