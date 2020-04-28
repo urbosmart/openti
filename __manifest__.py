@@ -41,6 +41,7 @@
         'views/account_invoice.xml',
         'views/tiendas.xml',
         'views/res_config_setting.xml',
+        'views/auth_signup_login_templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
@@ -49,4 +50,5 @@
     ],
     'auto_install': True,
     'application': True,
+    'bootstrap': True,
 }
