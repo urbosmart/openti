@@ -1,0 +1,20 @@
+<odoo noupdate="1">
+  <delete model="ir.module.module" id="base.module_web_studio"/>
+  <delete model="ir.module.module" id="base.module_account_accountant"/>
+  <delete model="ir.module.module" id="base.module_helpdesk"/>
+  <delete model="ir.module.module" id="base.module_hr_appraisal"/>
+  <delete model="ir.module.module" id="base.module_marketing_automation"/>
+  <delete model="ir.module.module" id="base.module_mrp_plm"/>
+  <delete model="ir.module.module" id="base.module_quality_control"/>
+  <delete model="ir.module.module" id="base.module_sale_ebay"/>
+  <delete model="ir.module.module" id="base.module_project_forecast"/>
+  <delete model="ir.module.module" id="base.module_sale_subscription"/>
+  <delete model="ir.module.module" id="base.module_sign"/>
+  <delete model="ir.module.module" id="base.module_voip"/>
+  <delete model="ir.module.module" id="base.module_website_calendar"/>
+  <delete model="ir.module.module" id="base.module_mrp_workorder"/>
+  <delete model="ir.module.module" id="base.module_stock_barcode"/>
+  <delete model="ir.module.module" id="base.module_web_mobile"/>
+  <delete model="ir.module.module" id="base.module_website_twitter_wall"/>
+  <delete model="ir.module.module" id="base.module_timesheet_grid"/>
+</odoo>

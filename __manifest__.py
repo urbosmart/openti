@@ -27,12 +27,15 @@
         'payment_khipu',
         'tecnopti',
         'web_responsive',
+        'agreement_legal',
+        'agreement_sale',
     ],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'data/inherit_report_paperformat.xml',
-        'demo/payment_cron.xml',
+        'data/promotion_modules.xml',
+        # 'demo/payment_cron.xml',
         # 'demo/default_barcode_patterns.xml',
         # 'demo/stock_data.xml',
         'report/inherit_invoice_layout.xml',
@@ -40,7 +43,6 @@
         'views/commissions_invoice_clearence.xml',
         'views/account_invoice.xml',
         'views/tiendas.xml',
-        'views/res_config_setting.xml',
         'views/auth_signup_login_templates.xml',
     ],
     # only loaded in demonstration mode

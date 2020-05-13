@@ -3,3 +3,4 @@ xmltodict
 dicttoxml
 py-wsse
 fe_openti
+pysftp==0.2.8

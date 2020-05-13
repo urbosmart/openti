@@ -2,4 +2,3 @@
 
 from . import controllers
 from . import redirect_debug
-from . import validate_sing_up

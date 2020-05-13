@@ -12,9 +12,7 @@ class KsHome(Home, http.Controller):
     @http.route('/web', type='http', auth="none")
     def web_client(self, s_action=None, **kw):
         ensure_db()
-        # if kw.get('debug') == "assets" or kw.get('debug') == '':
-        if kw.get('debug') != None:
-            if request.env['ir.config_parameter'].sudo().get_param('ks_hide_debug_assets_permission'):
+        if 'debug' in kw:
                 if not request.env.user.browse(request.session.uid)._is_admin():
                     return redirect_with_hash('/web')
 

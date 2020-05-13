@@ -25,6 +25,8 @@ class CustomWebsiteSale(WebsiteSale):
     @http.route('/tiendas/', auth='public', website=True)
     def index(self, **kw):
         Companies = http.request.env['res.company']
+        Products = http.request.env['product.template']
         return http.request.render('openti.tiendas', {
-            'companies': Companies.search([])
+            'companies': Companies.search([]),
+            'products': Products.search([])
         })
