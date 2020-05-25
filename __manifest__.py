@@ -27,14 +27,12 @@
         'payment_khipu',
         'tecnopti',
         'web_responsive',
-        'agreement_legal',
-        'agreement_sale',
     ],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'data/inherit_report_paperformat.xml',
-        'data/promotion_modules.xml',
+        # 'data/promotion_modules.xml',
         # 'demo/payment_cron.xml',
         # 'demo/default_barcode_patterns.xml',
         # 'demo/stock_data.xml',
