@@ -31,7 +31,10 @@ class CustomWebsiteSale(WebsiteSale):
             'products': Products.search([])
         })
 
-    @http.route()
+    @http.route([
+        '/payment/webpay/return/<model("payment.acquirer"):acquirer_id>',
+        '/payment/webpay/test/return',
+    ], type='http', auth='public', csrf=False, website=True)
     def webpay_form_feedback(self, acquirer_id=None, **post):
         """ Webpay contacts using GET, at least for accept """
         _logger.warning('Webpay: entering form_feedback with post data %s', pprint.pformat(post))  # debug
@@ -52,11 +55,11 @@ class CustomWebsiteSale(WebsiteSale):
         '''
         if resp:
             request.env['payment.transaction'].sudo().form_feedback(resp, 'webpay')
-            if and str(resp.detailOutput[0].responseCode) in ['0']:
+            if str(resp.detailOutput[0].responseCode) in ['0']:
                 values = {
-                            'url': resp.urlRedirection,
-                            'token_ws': token_ws
-                        }
+                    'url': resp.urlRedirection,
+                    'token_ws': token_ws
+                }
                 return request.render('payment_webpay.webpay_redirect', values)
             request.website.sale_reset()
         elif post.get('TBK_ORDEN_COMPRA'):
