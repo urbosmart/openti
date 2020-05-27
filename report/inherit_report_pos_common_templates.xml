@@ -64,6 +64,7 @@
               <t t-if="o.document_class_id.sii_code not in [ 61 ]" t-esc="o.company_id.website + '/boleta/' + str(o.sii_document_number)" />
             </p>
           </div>
+          </br>
 
       </xpath>
     </template>
