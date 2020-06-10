@@ -36,12 +36,15 @@
         # 'demo/payment_cron.xml',
         # 'demo/default_barcode_patterns.xml',
         # 'demo/stock_data.xml',
-        'report/inherit_invoice_layout.xml',
         'report/inherit_report_pos_common_templates.xml',
+        'report/inherit_invoice_layout.xml',
         'views/commissions_invoice_clearence.xml',
         'views/account_invoice.xml',
         'views/tiendas.xml',
         'views/auth_signup_login_templates.xml',
+        'views/address.xml',
+        'views/assets_frontend.xml',
+        'views/contact.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

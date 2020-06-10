@@ -1,0 +1,9 @@
+<odoo>
+  <template id="contactus_form" name="Contact Form" inherit_id="website_crm.contactus_form" customize_show="True">
+    <xpath expr="." position="inside">
+        <div>
+          <h1>tmp</h1>
+        </div>
+    </xpath>
+  </template>
+</odoo>
