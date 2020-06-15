@@ -10,7 +10,7 @@ class CustomWebpayController(WebpayController):
         '/payment/webpay/test/return',
     ], type='http', auth='public', csrf=False, website=True)
     def webpay_form_feedback(self, acquirer_id=None, **post):
-        resp = super(CustomWebsiteSale, self).webpay_form_feedback()
+        resp = super(CustomWebpayController, self).webpay_form_feedback()
         """ Webpay contacts using GET, at least for accept """
         _logger.warning('Webpay: entering form_feedback with post data %s', pprint.pformat(post))  # debug
         token_ws = post.get('token_ws') or post.get('TBK_TOKEN')

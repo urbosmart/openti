@@ -25,7 +25,7 @@ class CustomWebpayController(WebpayController, http.Controller):
         '/payment/webpay/final/<model("payment.acquirer"):acquirer_id>',
     ], type='http', auth='public', csrf=False, website=True)
     def final(self, acquirer_id=False, **post):
-        resp = super(CustomWebpayController, self).final(acquirer_id=s_action, **post)
+        resp = super(CustomWebpayController, self).final(acquirer_id, **post)
         """ Webpay contacts using GET, at least for accept """
         _logger.info('Webpay: entering End with post data %s', pprint.pformat(post))  # debug
         if post.get('TBK_TOKEN'):
