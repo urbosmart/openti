@@ -44,7 +44,6 @@
         'views/auth_signup_login_templates.xml',
         'views/address.xml',
         'views/assets_frontend.xml',
-        'views/contact.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

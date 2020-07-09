@@ -4,3 +4,10 @@ dicttoxml
 py-wsse
 fe_openti
 pysftp==0.2.8
+suds-jurko
+urllib3
+facturacion_electronica>=0.5.4
+num2words
+xlsxwriter
+pillow
+requests>=2.21.0
