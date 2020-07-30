@@ -5,7 +5,8 @@ py-wsse
 fe_openti
 pysftp==0.2.8
 suds-jurko
-urllib3
+# /usr/local/lib/python3.5/dist-packages/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.19.1) or chardet (3.0.4) doesn't match a supported version!
+#urllib3==1.19.1
 facturacion_electronica>=0.5.4
 num2words
 xlsxwriter

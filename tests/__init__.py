@@ -1,1 +1,1 @@
-from . import test_pos_order
+from . import test_l10n_cl_fe
