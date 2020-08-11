@@ -607,6 +607,12 @@ msgstr "Calle"
 msgid "Thank You !"
 msgstr "Gracias!"
 
+#. module: point_of_sale
+#: code:addons/point_of_sale/data/point_of_sale_data.xml:61
+
+msgid "POS Sale Journal"
+msgstr "POS Diario de Venta"
+
 #. module: portal
 #. openerp-web
 #: code:addons/portal/static/src/xml/portal_chatter.xml:12
