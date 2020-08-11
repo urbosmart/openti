@@ -5,11 +5,11 @@ py-wsse
 fe_openti
 pysftp==0.2.8
 suds-jurko
-#urllib3==1.19.1
+urllib3==1.19.1
 # facturacion_electronica>=0.5.4
 facturacion_electronica
 num2words
 xlsxwriter
 pillow
 requests>=2.21.0
-PyMUPDF
+PyMuPDF==1.16.6
