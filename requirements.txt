@@ -7,9 +7,11 @@ pysftp==0.2.8
 suds-jurko
 urllib3==1.19.1
 # facturacion_electronica>=0.5.4
-facturacion_electronica
+facturacion_electronica==0.11.5
 num2words
 xlsxwriter
 pillow
 requests>=2.21.0
 PyMuPDF==1.16.6
+payflow
+pykhipu

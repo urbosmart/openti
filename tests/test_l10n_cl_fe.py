@@ -214,6 +214,12 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         cls.env.ref('product.list0').write({
             'currency_id': cls.env.ref('base.CLP').id,
         })
+        cls.cash_journal = cls.env['account.journal'].search([('name', '=', 'Efectivo')]).write({
+            'default_debit_account_id':cls.env['account.account'].search([('name','=','Efectivo')]).id,
+            'default_credit_account_id':cls.env['account.account'].search([('name','=','Efectivo')]).id,
+            'loss_account_id':cls.env['account.account'].search([('name','=','Pérdida por Venta Activo')]).id,
+            'profit_account_id':cls.env['account.account'].search([('name','=','Ventas de Productos')]).id,
+        })
 
         cls.pos_config.write({
             'ticket':True,
@@ -222,11 +228,14 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'marcar':'boleta',
             'journal_ids': [(6,0,[
                 cls.env['account.journal'].search([('name','=','Efectivo')]).id,
+                cls.env['account.journal'].search([('name', '=', 'Banco')]).id,
             ])],
         })
+        cls.guia_document = cls.env['sii.document_class'].search([('name', 'ilike', 'Guía de Despacho Electrónica')])
         cls.sequence_guia = cls.env['ir.sequence'].create({
             'name': 'Guia de Despacho (certificacion)',
-             'implementation': 'no_gap',
+            'sii_document_class_id': cls.guia_document.id,
+            'implementation': 'no_gap',
             'is_dte': True,
             'forced_by_caf': True,
             'active': True,
@@ -241,19 +250,11 @@ class Test_l10n_cl_fe(SingleTransactionCase):
                 ),
             })],
         })
+
         cls.pos_config.stock_location_id.write({
-            'sii_document_class_id':cls.env['sii.document_class'].search([('sii_code','=',52)]),
+            'sii_document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', 52)]).id,
             'sequence_id':cls.sequence_guia.id,
         })
-        _logger.warning("###########################################################################")
-        _logger.warning("###########################################################################")
-        _logger.warning(cls.pos_config.stock_location_id.sii_document_class_id)
-        _logger.warning(cls.pos_config.stock_location_id.name)
-        _logger.warning(cls.pos_config.stock_location_id.usage)
-        _logger.warning(cls.pos_config.stock_location_id.sequence_id)
-        _logger.warning(cls.pos_config.picking_type_id)
-        _logger.warning("###########################################################################")
-        _logger.warning("###########################################################################")
 
         cls.pos_config.open_session_cb()
 
@@ -267,12 +268,15 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'balance_start': 0.0,
             'balance_end_real': 0.0,
             'date': time.strftime('%Y-%m-%d'),
-            'journal_id': cls.journal_boleta.id,
+            'journal_id': cls.env['account.journal'].search([('name','=','Efectivo')]).id,
             'company_id': cls.company.id,
             'name': 'pos session test',
         })
 
-        cls.pos_config.current_session_id.write({'statement_ids': [(6, 0, [cls.pos_statement.id])]})
+        cls.pos_config.current_session_id.write({
+            'statement_ids': [(6, 0, [cls.pos_statement.id])],
+            'secuencia_boleta': cls.sequence_boleta.id,
+        })
 
         # cls.pos_session = cls.env['pos.session'].create({
         #     'user_id':cls.env.ref('base.user_admin').id,
@@ -281,7 +285,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         # })
 
         # Create POS Order
-        cls.pos_order_0 = cls.order = cls.env['pos.order'].create({
+        cls.pos_order_0 = cls.env['pos.order'].create({
             'company_id':cls.company.id,
             'partner_id':cls.customer.id,
             'name':'Boleta Electronica/0001',
@@ -297,8 +301,11 @@ class Test_l10n_cl_fe(SingleTransactionCase):
                 'product_id': cls.product.id,
                 'qty':5,
                 'price_unit':cls.product.lst_price,
+                'tax_ids': [(6, 0, [
+                    cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id,
+                ])],
                 'tax_ids_after_fiscal_position': [(6, 0, [
-                    cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id
+                    cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id,
                 ])],
                 'price_subtotal':25000,
                 'price_subtotal_incl': 29750,
@@ -309,30 +316,31 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         context_make_payment = {"active_ids": [cls.pos_order_0.id], "active_id": cls.pos_order_0.id}
         cls.pos_make_payment_0 = cls.env['pos.make.payment'].with_context(context_make_payment).create({
             'amount': 29750.0,
-            'journal_id': cls.journal_boleta.id,
+            'journal_id': cls.env['account.journal'].search([('name','=','Efectivo')]).id,
         })
 
         # I click on the validate button to register the payment.
         context_payment = {'active_id': cls.pos_order_0.id}
         cls.pos_make_payment_0.with_context(context_payment).check()
 
-        # cls.env['pos.order.line'].create({
-        #     'product_id': cls.product.id,
-        #     'qty':5,
-        #     'price_unit':cls.product.lst_price,
-        #     'tax_ids_after_fiscal_position': [(6, 0, [
-        #         cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id
-        #     ])],
-        #     'order_id': cls.order.id,
-        #     'price_subtotal':25000,
-        #     'price_subtotal_incl': 29750,
-        # })
         # cls.order.do_validate()
-        # cls.order.do_dte_send_order()
+        cls.pos_order_0.do_dte_send_order()
         # cls.order.action_pos_order_paid()
         # cls.order.action_pos_order_done()
 
-
+        _logger.warning("##################################################################")
+        _logger.warning("##################################################################")
+        _logger.warning("##################################################################")
+        _logger.warning(cls.pos_order_0.session_id)
+        _logger.warning(cls.pos_order_0.pos_reference)
+        _logger.warning(cls.pos_order_0.sale_journal)
+        _logger.warning(cls.pos_order_0.state)
+        _logger.warning(cls.pos_order_0.sii_xml_dte)
+        _logger.warning(cls.pos_order_0.signature)
+        _logger.warning(cls.pos_order_0.sii_result)
+        _logger.warning("##################################################################")
+        _logger.warning("##################################################################")
+        _logger.warning("##################################################################")
 
 
         # I close the current session to generate the journal entries
