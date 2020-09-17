@@ -14,9 +14,9 @@ class Test_l10n_cl_fe(SingleTransactionCase):
     def setUpClass(cls):
         super(Test_l10n_cl_fe, cls).setUpClass()
         cls.number = {
-            'boleta':101,
+            'boleta':112,
             'factura_electronica':188,
-            'guia_despacho':93,
+            'guia_despacho':94,
         }
         # Creacion de firma electronica
         file_string = open("/home/abiezer/Documentos/jsanhueza.p12", "rb").read()
@@ -74,14 +74,14 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'zip': '4030000',
             'dte_service_provider': 'SIICERT',
             'dte_resolution_number': '0',
-            'dte_resolution_date': datetime.date(2016, 2, 11),
+            'dte_resolution_date': datetime.date(2016, 2, 11).strftime('%Y-%m-%d'),
             'sii_regional_office_id': cls.env.ref('l10n_cl_fe.ur_Cop').id,
             'phone': '+56412227164',
             'email': 'contacto@openti.cl',
             'document_type_id': cls.env.ref('l10n_cl_fe.dt_RUT'),
             'document_number': '76.323.752-4',
             'responsability_id': cls.env.ref('l10n_cl_fe.res_IVARI'),
-            'start_date': datetime.date(2014, 1, 24),
+            'start_date': datetime.date(2014, 1, 24).strftime('%Y-%m-%d'),
             'company_activities_ids': [(6, 0, [
                 cls.env.ref('l10n_cl_fe.eco_acti_611090').id,
                 cls.env.ref('l10n_cl_fe.eco_acti_620200').id,
@@ -101,17 +101,23 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'is_dte': True,
             'forced_by_caf':True,
             'number_next_actual':cls.number['factura_electronica'],
+            'dte_caf_ids': [(0, 0, {
+                'company_id':cls.company.id,
+                'caf_file': base64.encodestring(open(
+                    "/home/abiezer/Documentos/Folios/FacturaElectronica/179-188/FoliosSII763237523317920207291220.xml",
+                    "rb").read()),
+            })]
         })
 
-        file_string = open(
-            "/home/abiezer/Documentos/Folios/FacturaElectronica/179-188/FoliosSII763237523317920207291220.xml",
-            "rb").read()
+        # file_string = open(
+        #     "/home/abiezer/Documentos/Folios/FacturaElectronica/179-188/FoliosSII763237523317920207291220.xml",
+        #     "rb").read()
 
-        cls.dte = cls.env['dte.caf'].create({
-            'company_id':cls.company.id,
-            'caf_file': base64.encodestring(file_string),
-            'sequence_id': cls.sequence.id
-        })
+        # cls.dte = cls.env['dte.caf'].create({
+        #     'company_id':cls.company.id,
+        #     'caf_file': base64.encodestring(file_string),
+        #     'sequence_id': cls.sequence.id
+        # })
 
         # Write and Create Journal
         cls.journal = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
@@ -284,20 +290,23 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         #     'secuencia_boleta':cls.sequence_boleta.id,
         # })
 
+        # 'sii_document_number': cls.number['boleta'],
+
         # Create POS Order
         cls.pos_order_0 = cls.env['pos.order'].create({
+            'document_class_id':cls.env['sii.document_class'].search([('sii_code', '=', 39)]).id,
             'company_id':cls.company.id,
             'partner_id':cls.customer.id,
             'name':'Boleta Electronica/0001',
-            'amount_tax':4750,
-            'amount_total':29750,
+            'amount_tax':9500,
+            'amount_total':50000,
             'amount_paid': 0,
             'amount_return':0,
             'pricelist_id':cls.env.ref('product.list0').id,
             'session_id':cls.pos_config.current_session_id.id,
             'sequence_id':cls.sequence_boleta.id,
             'lines':[(0,0,{
-                'name':"OL/0001",
+                'name':"OL/0002",
                 'product_id': cls.product.id,
                 'qty':5,
                 'price_unit':cls.product.lst_price,
@@ -307,15 +316,15 @@ class Test_l10n_cl_fe(SingleTransactionCase):
                 'tax_ids_after_fiscal_position': [(6, 0, [
                     cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id,
                 ])],
-                'price_subtotal':25000,
-                'price_subtotal_incl': 29750,
+                'price_subtotal':50000,
+                'price_subtotal_incl': 50000,
             })],
         })
 
         # I make a payment to fully pay the order
         context_make_payment = {"active_ids": [cls.pos_order_0.id], "active_id": cls.pos_order_0.id}
         cls.pos_make_payment_0 = cls.env['pos.make.payment'].with_context(context_make_payment).create({
-            'amount': 29750.0,
+            'amount': 50000,
             'journal_id': cls.env['account.journal'].search([('name','=','Efectivo')]).id,
         })
 
@@ -324,23 +333,10 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         cls.pos_make_payment_0.with_context(context_payment).check()
 
         # cls.order.do_validate()
-        cls.pos_order_0.do_dte_send_order()
+        cls.pos_order_0.do_dte_send()
+        # cls.pos_order_0.do_dte_send_order()
         # cls.order.action_pos_order_paid()
         # cls.order.action_pos_order_done()
-
-        _logger.warning("##################################################################")
-        _logger.warning("##################################################################")
-        _logger.warning("##################################################################")
-        _logger.warning(cls.pos_order_0.session_id)
-        _logger.warning(cls.pos_order_0.pos_reference)
-        _logger.warning(cls.pos_order_0.sale_journal)
-        _logger.warning(cls.pos_order_0.state)
-        _logger.warning(cls.pos_order_0.sii_xml_dte)
-        _logger.warning(cls.pos_order_0.signature)
-        _logger.warning(cls.pos_order_0.sii_result)
-        _logger.warning("##################################################################")
-        _logger.warning("##################################################################")
-        _logger.warning("##################################################################")
 
 
         # I close the current session to generate the journal entries
@@ -370,58 +366,19 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'price_subtotal':50000,
         })
 
-        # cls.setUpInvoice39()
-
         #Envio 39
         # cls.invoice_boleta.action_invoice_open()
         # cls.invoice_boleta.do_dte_send_invoice()
-        # Envio 39
+        # Envio 34
         # cls.invoice.action_invoice_open()
         # cls.invoice.do_dte_send_invoice()
 
-        # while cls.env['sii.cola_envio'].search([]):
-        #     cls.env['sii.cola_envio']._cron_procesar_cola()
+        while cls.env['sii.cola_envio'].search([]):
+            _logger.warning("Enviando ...")
+            cls.env['sii.cola_envio']._cron_procesar_cola()
         #Envio
-
-    # def test_invoice_state(self):
-    #     self.assertEqual(self.invoice.state,'paid')
 
 
     def test_validate_signature2(self):
         self.assertEqual(self.firma.state, 'valid')
 
-    # @classmethod
-    # def setUpSequence39(cls):
-
-
-        # Close
-        # cls.pos_session.action_pos_session_closing_control()
-    # @classmethod
-    # def setUpInvoice39(cls):
-        # Create Invoice
-        # cls.invoice_boleta = cls.env['account.invoice'].create({
-        #     'journal_document_class_id': cls.document_class_boleta.id,
-        #     'partner_id': cls.customer.id,
-        #     'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
-        # })
-        #
-        # # Create Invoice Lines
-        # cls.line_boleta = cls.env['account.invoice.line'].create({
-        #     'name': cls.product.name,
-        #     'product_id': cls.product.id,
-        #     'quantity': 5,
-        #     'uom_id': cls.env.ref('uom.product_uom_unit').id,
-        #     'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
-        #     'price_unit': cls.product.lst_price,
-        #     'invoice_id': cls.invoice_boleta.id,
-        #     'invoice_line_tax_ids': [(6, 0, [cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id])],
-        #     'price_subtotal': 50000,
-        # })
-
-    # @classmethod
-    # def setUpPosOrder(cls):
-    #     cls.pos_config = cls.env['pos.config'].search([('id', '=', 1)])
-        # cls.pos_config.write({
-        #     'ticket':True,
-        #     'journal_id': cls.env['account.journal'].search([('name', '=', 'POS Sale Journal')]).id,
-        # })
