@@ -15,7 +15,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         super(Test_l10n_cl_fe, cls).setUpClass()
         cls.number = {
             'boleta':122,
-            'factura_electronica':189,
+            'factura_electronica':194,
             'guia_despacho':96,
         }
         # Creacion de firma electronica
@@ -24,9 +24,9 @@ class Test_l10n_cl_fe(SingleTransactionCase):
                 'file': 'FoliosSII76323752391012020871546.xml',
                 'location':'/home/abiezer/Documentos/Folios/BoletaElectronica/101-150/'
             },
-            '34': {
-                'file': 'FoliosSII763237523317920207291220.xml',
-                'location': '/home/abiezer/Documentos/Folios/FacturaElectronica/179-188/'
+            '33': {
+                'file': 'FoliosSII763237523318920209111248.xml',
+                'location': '/home/abiezer/Documentos/Folios/FacturaElectronica/189-196/'
             },
             '52': {
                 'file': 'FoliosSII76323752528120208281838.xml',
@@ -109,37 +109,21 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         })
         #Creating Journal 33
         cls.sequence = cls.env['ir.sequence'].create({
+            'active':True,
             'name': 'Factura Electronica(Tests)',
             'implementation': 'no_gap',
-            'sii_document_class_id': cls.env['sii.document_class'].search([('name', '=', 'Factura Electrónica')]).id,
+            'sii_document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', '33')]).id,
             'is_dte': True,
             'forced_by_caf':True,
             'number_next_actual':cls.number['factura_electronica'],
-            # 'dte_caf_ids': [(0, 0, {
-            #     'company_id':cls.company.id,
-            #     'caf_file': base64.encodestring(open(
-            #          cls.folios['34']['location'] + cls.folios['34']['file']
-            #         ,"rb").read()),
-            #     'filename': cls.folios['34']['file'],
-            # })]
+            'dte_caf_ids': [(0, 0, {
+                'company_id':cls.company.id,
+                'caf_file': base64.encodestring(open(
+                     cls.folios['33']['location'] + cls.folios['33']['file']
+                    ,"rb").read()),
+                'filename': cls.folios['33']['file'],
+            })]
         })
-
-        # file_string = open(
-        #     "/home/abiezer/Documentos/Folios/FacturaElectronica/179-188/FoliosSII763237523317920207291220.xml",
-        #     "rb").read()
-
-        cls.dte = cls.env['dte.caf'].create({
-            'company_id':cls.company.id,
-            'caf_file': base64.encodestring(open(
-                cls.folios['34']['location'] + cls.folios['34']['file']
-            ,"rb").read()),
-            'filename': cls.folios['34']['file'],
-            'sequence_id': cls.sequence.id
-        })
-
-        # cls.dte.load_caf()
-
-        # import pydevd; pydevd.settrace()
 
         # Write and Create Journal
         cls.journal = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
@@ -208,21 +192,6 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             })],
         })
 
-        # cls.sequence_boleta.dte_caf_ids[0].load_caf()
-        #
-        # import pydevd; pydevd.settrace()
-
-        # cls.dte_boleta = cls.env['dte.caf'].create({
-        #     'company_id': cls.company.id,
-        #     'caf_file': base64.encodestring(
-        #         open(
-        #             "/home/abiezer/Documentos/Folios/BoletaElectronica/101-150/FoliosSII76323752391012020871546.xml",
-        #             "rb").read()
-        #     ),
-        #     'sequence_id': cls.sequence_boleta.id,
-        #     'filename': 'FoliosSII76323752391012020871546.xml',
-        # })
-
         # Write and Create Journal
         cls.journal_boleta = cls.env['account.journal'].search([('name', '=', 'POS Sale Journal')])
 
@@ -270,11 +239,6 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         })
 
         cls.sequence_guia.dte_caf_ids[0].load_caf()
-
-        # cls.pos_config.stock_location_id.write({
-        #     'sii_document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', 52)]).id,
-        #     'sequence_id':cls.sequence_guia.id,
-        # })
 
         cls.stock_location = cls.env['stock.location'].create({
             'name':'Certificacion',
@@ -380,7 +344,6 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         })
 
         cls.sequence_boleta.dte_caf_ids[0].load_caf()
-        cls.sequence.dte_caf_ids[0].load_caf()
         cls.sequence_guia.dte_caf_ids[0].load_caf()
 
         if not cls.sequence_guia.dte_caf_ids[0].caf_string:
@@ -390,12 +353,8 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         context_payment = {'active_ids':[cls.pos_config.id],'active_id': cls.pos_order_0.id}
         cls.pos_make_payment_0.with_context(context_payment).check()
 
-        # cls.order.do_validate()
         cls.pos_order_0.do_dte_send()
-        # cls.pos_order_0.do_dte_send_order()
-        # cls.order.action_pos_order_paid()
-        # cls.order.action_pos_order_done()
-
+        cls.pos_order_0.picking_id.do_dte_send()
 
         # I close the current session to generate the journal entries
         cls.pos_config.current_session_id.action_pos_session_close()
@@ -409,6 +368,10 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'journal_document_class_id': cls.document_class.id,
             'partner_id': cls.env['res.partner'].search([('name', 'ilike', 'Abiezer')]).id,
             'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
+            'document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', 33)]).id,
+            'forma_pago':'1',
+            'date_invoice':datetime.date.today().strftime('%Y-%m-%d'),
+            'date_due':datetime.date.today().strftime('%Y-%m-%d'),
         })
 
         # Create Invoice Lines
@@ -424,16 +387,21 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'price_subtotal':50000,
         })
 
-        #Envio 39
-        # cls.invoice_boleta.action_invoice_open()
-        # cls.invoice_boleta.do_dte_send_invoice()
-        # Envio 34
-        # cls.invoice.action_invoice_open()
-        # cls.invoice.do_dte_send_invoice()
+        # Envio 33
+        cls.sequence.get_caf_files(cls.number['factura_electronica'])
+        cls.sequence.dte_caf_ids[0].load_caf()
+        cls.invoice.action_invoice_open()
+        cls.invoice.do_dte_send_invoice()
 
         while cls.env['sii.cola_envio'].search([]):
             _logger.warning("Enviando ...")
-            _logger.warning(cls.env['sii.cola_envio'].search([]))
+            for elem in cls.env['sii.cola_envio'].search([]):
+                _logger.warning(elem.model)
+                ident = cls.env['{}'.format(elem.model)].search([('id','in',[elem.doc_ids.replace('[','').replace(']','')])])
+                _logger.warning(ident.name)
+                _logger.warning(ident.sii_result)
+            _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
+            _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
             cls.env['sii.cola_envio']._cron_procesar_cola()
         #Envio
 
