@@ -21,19 +21,19 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         # Creacion de firma electronica
         cls.folios = {
             '39':{
-                'file': 'FoliosSII76323752391012020871546.xml',
-                'location':'/home/abiezer/Documentos/Folios/BoletaElectronica/101-150/'
+                'file': 'FoliosSII7632375239101202010291227.xml',
+                'location':'/home/Folios/BoletaElectronica/101-150/'
             },
             '33': {
-                'file': 'FoliosSII763237523318920209111248.xml',
-                'location': '/home/abiezer/Documentos/Folios/FacturaElectronica/189-196/'
+                'file': 'FoliosSII7632375233189202010291229.xml',
+                'location': '/home/Folios/FacturaElectronica/189-196/'
             },
             '52': {
-                'file': 'FoliosSII76323752528120208281838.xml',
-                'location': '/home/abiezer/Documentos/Folios/GuiaDespacho/'
+                'file': 'FoliosSII763237525281202010291230.xml',
+                'location': '/home/Folios/GuiaDespacho/81-130/'
             }
         }
-        file_string = open("/home/abiezer/Documentos/jsanhueza.p12", "rb").read()
+        file_string = open("/home/jsanhueza.p12", "rb").read()
         cls.firma = cls.env['sii.firma'].create({
             'name': 'jsanhueza.p12',
             'file_content': base64.encodestring(file_string),
