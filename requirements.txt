@@ -2,7 +2,7 @@ xmlsec
 xmltodict
 dicttoxml
 py-wsse
-fe_openti
+# fe_openti
 pysftp==0.2.8
 suds-jurko
 urllib3==1.25.10
@@ -14,4 +14,6 @@ requests>=2.21.0
 PyMuPDF==1.16.6
 payflow
 pykhipu
+#dependency of module website_form_builder
+openupgradelib
 # Crear un Diario de Banco para Webpay
