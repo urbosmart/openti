@@ -14,26 +14,26 @@ class Test_l10n_cl_fe(SingleTransactionCase):
     def setUpClass(cls):
         super(Test_l10n_cl_fe, cls).setUpClass()
         cls.number = {
-            'boleta':122,
-            'factura_electronica':194,
-            'guia_despacho':96,
+            'boleta':123,
+            'factura_electronica':197,
+            'guia_despacho':97,
         }
         # Creacion de firma electronica
         cls.folios = {
             '39':{
                 'file': 'FoliosSII7632375239101202010291227.xml',
-                'location':'/home/Folios/BoletaElectronica/101-150/'
+                'location':'FacFiles/Folios/BoletaElectronica/101-150/'
             },
             '33': {
-                'file': 'FoliosSII7632375233189202010291229.xml',
-                'location': '/home/Folios/FacturaElectronica/189-196/'
+                'file': 'FoliosSII763237523319720201121333.xml',
+                'location': 'FacFiles/Folios/FacturaElectronica/197-209/'
             },
             '52': {
                 'file': 'FoliosSII763237525281202010291230.xml',
-                'location': '/home/Folios/GuiaDespacho/81-130/'
+                'location': 'FacFiles/Folios/GuiaDespacho/81-130/'
             }
         }
-        file_string = open("/home/jsanhueza.p12", "rb").read()
+        file_string = open("FacFiles/jsanhueza.p12", "rb").read()
         cls.firma = cls.env['sii.firma'].create({
             'name': 'jsanhueza.p12',
             'file_content': base64.encodestring(file_string),
@@ -191,6 +191,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
                 'filename': cls.folios['39']['file'],
             })],
         })
+        cls.sequence_boleta.dte_caf_ids[0].load_caf()
 
         # Write and Create Journal
         cls.journal_boleta = cls.env['account.journal'].search([('name', '=', 'POS Sale Journal')])
@@ -248,6 +249,9 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'sequence_id':cls.sequence_guia.id,
             'partner_id':cls.env['res.partner'].search([('name', '=', 'Comercializacion Y Servicios Informaticos Sanhueza & Mujica Spa')]).id,
             'company_id':cls.company.id,
+            'acteco_ids': [(6, 0, [
+                cls.env.ref('l10n_cl_fe.eco_acti_722000').id,
+            ])]
         })
 
         cls.picking_type =  cls.env['stock.picking.type'].create({
@@ -309,6 +313,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
 
         # Create POS Order
         cls.pos_order_0 = cls.env['pos.order'].create({
+            'sii_document_number': cls.sequence_boleta.number_next_actual,
             'document_class_id':cls.env['sii.document_class'].search([('sii_code', '=', 39)]).id,
             'company_id':cls.company.id,
             'partner_id':cls.customer.id,
@@ -350,62 +355,65 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             cls.sequence_guia.dte_caf_ids[0].caf_string = base64.b64decode(cls.sequence_guia.dte_caf_ids[0].caf_file).decode("ISO-8859-1")
 
         # I click on the validate button to register the payment.
-        context_payment = {'active_ids':[cls.pos_config.id],'active_id': cls.pos_order_0.id}
-        cls.pos_make_payment_0.with_context(context_payment).check()
 
-        cls.pos_order_0.do_dte_send()
-        cls.pos_order_0.picking_id.do_dte_send()
 
-        # I close the current session to generate the journal entries
-        cls.pos_config.current_session_id.action_pos_session_close()
         #####################################################################################################################
         #####################################################################################################################
         #####################################################################################################################
         #####################################################################################################################
 
         # Create Invoice
-        cls.invoice = cls.env['account.invoice'].create({
-            'journal_document_class_id': cls.document_class.id,
-            'partner_id': cls.env['res.partner'].search([('name', 'ilike', 'Abiezer')]).id,
-            'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
-            'document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', 33)]).id,
-            'forma_pago':'1',
-            'date_invoice':datetime.date.today().strftime('%Y-%m-%d'),
-            'date_due':datetime.date.today().strftime('%Y-%m-%d'),
-        })
-
-        # Create Invoice Lines
-        cls.line = cls.env['account.invoice.line'].create({
-            'name': cls.product.name,
-            'product_id': cls.product.id,
-            'quantity': 5,
-            'uom_id': cls.env.ref('uom.product_uom_unit').id,
-            'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
-            'price_unit': cls.product.lst_price,
-            'invoice_id': cls.invoice.id,
-            'invoice_line_tax_ids': [(6, 0, [cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id])],
-            'price_subtotal':50000,
-        })
+        # cls.invoice = cls.env['account.invoice'].create({
+        #     'journal_document_class_id': cls.document_class.id,
+        #     'partner_id': cls.env['res.partner'].search([('name', 'ilike', 'Abiezer')]).id,
+        #     'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
+        #     'document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', 33)]).id,
+        #     'forma_pago':'1',
+        #     'date_invoice':datetime.date.today().strftime('%Y-%m-%d'),
+        #     'date_due':datetime.date.today().strftime('%Y-%m-%d'),
+        # })
+        #
+        # # Create Invoice Lines
+        # cls.line = cls.env['account.invoice.line'].create({
+        #     'name': cls.product.name,
+        #     'product_id': cls.product.id,
+        #     'quantity': 5,
+        #     'uom_id': cls.env.ref('uom.product_uom_unit').id,
+        #     'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
+        #     'price_unit': cls.product.lst_price,
+        #     'invoice_id': cls.invoice.id,
+        #     'invoice_line_tax_ids': [(6, 0, [cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id])],
+        #     'price_subtotal':50000,
+        # })
 
         # Envio 33
-        cls.sequence.get_caf_files(cls.number['factura_electronica'])
-        cls.sequence.dte_caf_ids[0].load_caf()
-        cls.invoice.action_invoice_open()
-        cls.invoice.do_dte_send_invoice()
+        # cls.sequence.get_caf_files(cls.number['factura_electronica'])
+        # cls.sequence.dte_caf_ids[0].load_caf()
+        # cls.invoice.action_invoice_open()
+        # cls.invoice.do_dte_send_invoice()
 
-        while cls.env['sii.cola_envio'].search([]):
-            _logger.warning("Enviando ...")
-            for elem in cls.env['sii.cola_envio'].search([]):
-                _logger.warning(elem.model)
-                ident = cls.env['{}'.format(elem.model)].search([('id','in',[elem.doc_ids.replace('[','').replace(']','')])])
-                _logger.warning(ident.name)
-                _logger.warning(ident.sii_result)
-            _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
-            _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
-            cls.env['sii.cola_envio']._cron_procesar_cola()
+        # while cls.env['sii.cola_envio'].search([]):
+        #     _logger.warning("Enviando ...")
+        #     for elem in cls.env['sii.cola_envio'].search([]):
+        #         _logger.warning(elem.model)
+        #         ident = cls.env['{}'.format(elem.model)].search([('id','in',[elem.doc_ids.replace('[','').replace(']','')])])
+        #         _logger.warning(ident.name)
+        #         _logger.warning(ident.sii_result)
+        #     _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
+        #     _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
+        #     cls.env['sii.cola_envio']._cron_procesar_cola()
         #Envio
 
 
-    def test_validate_signature2(self):
-        self.assertEqual(self.firma.state, 'valid')
+    # def test_validate_signature2(self):
+    #     self.assertEqual(self.firma.state, 'valid')
 
+    def test_enviar_boleta(self):
+        self.pos_order_0.do_dte_send()
+        # self.pos_order_0.picking_id.do_dte_send()
+
+        context_payment = {'active_ids':[self.pos_config.id],'active_id': self.pos_order_0.id}
+        self.pos_make_payment_0.with_context(context_payment).check()
+
+        # I close the current session to generate the journal entries
+        self.pos_config.current_session_id.action_pos_session_close()
