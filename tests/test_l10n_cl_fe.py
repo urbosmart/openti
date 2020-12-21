@@ -22,18 +22,18 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         cls.folios = {
             '39':{
                 'file': 'FoliosSII7632375239101202010291227.xml',
-                'location':'FacFiles/Folios/BoletaElectronica/101-150/'
+                'location':'/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/BoletaElectronica/101-150/'
             },
             '33': {
                 'file': 'FoliosSII763237523319720201121333.xml',
-                'location': 'FacFiles/Folios/FacturaElectronica/197-209/'
+                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/FacturaElectronica/197-209/'
             },
             '52': {
                 'file': 'FoliosSII763237525281202010291230.xml',
-                'location': 'FacFiles/Folios/GuiaDespacho/81-130/'
+                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
             }
         }
-        file_string = open("FacFiles/jsanhueza.p12", "rb").read()
+        file_string = open("/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/jsanhueza.p12", "rb").read()
         cls.firma = cls.env['sii.firma'].create({
             'name': 'jsanhueza.p12',
             'file_content': base64.encodestring(file_string),
@@ -410,10 +410,22 @@ class Test_l10n_cl_fe(SingleTransactionCase):
 
     def test_enviar_boleta(self):
         self.pos_order_0.do_dte_send()
-        # self.pos_order_0.picking_id.do_dte_send()
 
         context_payment = {'active_ids':[self.pos_config.id],'active_id': self.pos_order_0.id}
         self.pos_make_payment_0.with_context(context_payment).check()
 
+        self.pos_order_0.picking_id.do_dte_send()
         # I close the current session to generate the journal entries
         self.pos_config.current_session_id.action_pos_session_close()
+        while self.env['sii.cola_envio'].search([]):
+            _logger.warning("Enviando ...")
+            for elem in self.env['sii.cola_envio'].search([]):
+                _logger.warning(elem.model)
+                ident = self.env['{}'.format(elem.model)].search([('id','in',[elem.doc_ids.replace('[','').replace(']','')])])
+                _logger.warning(ident.name)
+                _logger.warning(ident.sii_result)
+            _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
+            _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
+            self.env['sii.cola_envio']._cron_procesar_cola()
+
+
