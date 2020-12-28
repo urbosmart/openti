@@ -17,4 +17,3 @@ pykhipu
 #dependency of module website_form_builder
 openupgradelib
 # Crear un Diario de Banco para Webpay
-pysftp
