@@ -15,6 +15,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         super(Test_l10n_cl_fe, cls).setUpClass()
         cls.number = {
             'boleta':123,
+            'factura_compra':1,
             'factura_electronica':197,
             'guia_despacho':97,
         }
@@ -31,6 +32,10 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             '52': {
                 'file': 'FoliosSII763237525281202010291230.xml',
                 'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
+            },
+            '46':{
+                'file': 'FoliosSII763237524661202011191529.xml',
+                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
             }
         }
         file_string = open("/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/jsanhueza.p12", "rb").read()
@@ -125,6 +130,23 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             })]
         })
 
+        # Create journal
+        cls.sequence_46 = cls.env['ir.sequence'].create({
+            'active':True,
+            'name': 'Factura Electronica Compra(Tests)',
+            'implementation': 'no_gap',
+            'sii_document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', '46')]).id,
+            'is_dte': True,
+            'forced_by_caf':True,
+            'number_next_actual':cls.number['factura_compra'],
+            'dte_caf_ids': [(0, 0, {
+                'company_id':cls.company.id,
+                'caf_file': base64.encodestring(open(
+                     cls.folios['46']['location'] + cls.folios['46']['file']
+                    ,"rb").read()),
+                'filename': cls.folios['46']['file'],
+            })]
+        })
         # Write and Create Journal
         cls.journal = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
 
@@ -144,7 +166,17 @@ class Test_l10n_cl_fe(SingleTransactionCase):
                 cls.document_class.id
             ])],
         })
+        #######################################################################################
+        ##################### Document 46 (Factura de Compra Electronica) #####################
+        #######################################################################################
 
+        cls.journal_46 = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
+        
+
+
+        #######################################################################################
+        #######################################################################################
+        #######################################################################################
         # Create Customer
         cls.customer = cls.env['res.partner'].create({
             'name': 'Abiezer',
@@ -357,66 +389,95 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         # I click on the validate button to register the payment.
 
 
-        #####################################################################################################################
-        #####################################################################################################################
-        #####################################################################################################################
-        #####################################################################################################################
+        ############################################################################################################
+        ############################################################################################################
+        ############################################################################################################
+        ############################################################################################################
 
         # Create Invoice
-        # cls.invoice = cls.env['account.invoice'].create({
-        #     'journal_document_class_id': cls.document_class.id,
-        #     'partner_id': cls.env['res.partner'].search([('name', 'ilike', 'Abiezer')]).id,
-        #     'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
-        #     'document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', 33)]).id,
-        #     'forma_pago':'1',
-        #     'date_invoice':datetime.date.today().strftime('%Y-%m-%d'),
-        #     'date_due':datetime.date.today().strftime('%Y-%m-%d'),
-        # })
-        #
-        # # Create Invoice Lines
-        # cls.line = cls.env['account.invoice.line'].create({
-        #     'name': cls.product.name,
-        #     'product_id': cls.product.id,
-        #     'quantity': 5,
-        #     'uom_id': cls.env.ref('uom.product_uom_unit').id,
-        #     'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
-        #     'price_unit': cls.product.lst_price,
-        #     'invoice_id': cls.invoice.id,
-        #     'invoice_line_tax_ids': [(6, 0, [cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id])],
-        #     'price_subtotal':50000,
-        # })
-
+        cls.invoice = cls.env['account.invoice'].create({
+            'journal_document_class_id': cls.document_class.id,
+            'partner_id': cls.env['res.partner'].search([('name', 'ilike', 'Abiezer')]).id,
+            'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
+            'document_class_id': cls.env['sii.document_class'].search([('sii_code', '=', 33)]).id,
+            'forma_pago':'1',
+            'date_invoice':datetime.date.today().strftime('%Y-%m-%d'),
+            'date_due':datetime.date.today().strftime('%Y-%m-%d'),
+        })
+                # # Create Invoice Lines
+        cls.line = cls.env['account.invoice.line'].create({
+            'name': cls.product.name,
+            'product_id': cls.product.id,
+            'quantity': 5,
+            'uom_id': cls.env.ref('uom.product_uom_unit').id,
+            'account_id': cls.env.ref('l10n_cl_chart_of_account.1_410201').id,
+            'price_unit': cls.product.lst_price,
+            'invoice_id': cls.invoice.id,
+            'invoice_line_tax_ids': [(6, 0, [cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id])],
+            'price_subtotal':50000,
+        })
+    """
+    def test_enviar_33(self):
         # Envio 33
-        # cls.sequence.get_caf_files(cls.number['factura_electronica'])
-        # cls.sequence.dte_caf_ids[0].load_caf()
-        # cls.invoice.action_invoice_open()
-        # cls.invoice.do_dte_send_invoice()
-
-        # while cls.env['sii.cola_envio'].search([]):
-        #     _logger.warning("Enviando ...")
-        #     for elem in cls.env['sii.cola_envio'].search([]):
-        #         _logger.warning(elem.model)
-        #         ident = cls.env['{}'.format(elem.model)].search([('id','in',[elem.doc_ids.replace('[','').replace(']','')])])
-        #         _logger.warning(ident.name)
-        #         _logger.warning(ident.sii_result)
-        #     _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
-        #     _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
-        #     cls.env['sii.cola_envio']._cron_procesar_cola()
-        #Envio
-
-
-    # def test_validate_signature2(self):
-    #     self.assertEqual(self.firma.state, 'valid')
-
-    def test_enviar_boleta(self):
+        self.sequence.get_caf_files(self.number['factura_electronica'])
+        self.sequence.dte_caf_ids[0].load_caf()
+        self.invoice.action_invoice_open()
+        self.invoice.do_dte_send_invoice()
+    """
+    """
+    def test_validate_signature2(self):
+        self.assertEqual(self.firma.state, 'valid')
+    """
+    """
+    def test_enviar_39(self):
         self.pos_order_0.do_dte_send()
 
         context_payment = {'active_ids':[self.pos_config.id],'active_id': self.pos_order_0.id}
         self.pos_make_payment_0.with_context(context_payment).check()
 
-        self.pos_order_0.picking_id.do_dte_send()
         # I close the current session to generate the journal entries
         self.pos_config.current_session_id.action_pos_session_close()
+
+
+        self.pos_order_0.picking_id.do_dte_send()
+    """
+
+    def test_enviar_46(self):
+        self.document_class_46 = self.env['account.journal.sii_document_class'].create({
+            'journal_id': self.journal_46.id,
+            'sii_document_class_id': self.env['sii.document_class'].search(
+                [('name', '=', 'Factura Electrónica')]).id,
+            'sequence_id': self.sequence_46.id
+        })
+        # Creating Invoice 46
+        self.invoice_46 = self.env['account.invoice'].create({
+            'journal_document_class_id': self.document_class_46.id,
+            'partner_id': self.env['res.partner'].search([('name', 'ilike', 'Abiezer')]).id,
+            'account_id': self.env.ref('l10n_cl_chart_of_account.410201').id,
+            'document_class_id': self.env['sii.document_class'].search([('sii_code', '=', 46)]).id,
+            'forma_pago':'1',
+            'date_invoice':datetime.date.today().strftime('%Y-%m-%d'),
+            'date_due':datetime.date.today().strftime('%Y-%m-%d'),
+        })
+        # Create Invoice 46 Lines
+        self.line_46 = self.env['account.invoice.line'].create({
+            'name': self.product.name,
+            'product_id': self.product.id,
+            'quantity': 5,
+            'uom_id': self.env.ref('uom.product_uom_unit').id,
+            'account_id': self.env.ref('l10n_cl_chart_of_account.1_410201').id,
+            'price_unit': self.product.lst_price,
+            'invoice_id': self.invoice_46.id,
+            'invoice_line_tax_ids': [(6, 0, [self.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id])],
+            'price_subtotal':50000,
+        })
+        _logger.warning("sending 46..")
+        self.sequence_46.get_caf_files(self.number['factura_compra'])
+        self.sequence_46.dte_caf_ids[0].load_caf()
+        self.invoice_46.action_invoice_open()
+        self.invoice_46.do_dte_send_invoice()
+
+#    def test_cola(self):
         while self.env['sii.cola_envio'].search([]):
             _logger.warning("Enviando ...")
             for elem in self.env['sii.cola_envio'].search([]):
