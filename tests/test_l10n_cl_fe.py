@@ -15,7 +15,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         super(Test_l10n_cl_fe, cls).setUpClass()
         cls.number = {
             'boleta':123,
-            'factura_compra':1,
+            'factura_compra':62,
             'factura_electronica':197,
             'guia_despacho':97,
         }
@@ -38,11 +38,11 @@ class Test_l10n_cl_fe(SingleTransactionCase):
                 'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
             }
         }
-        file_string = open("/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/jsanhueza.p12", "rb").read()
+        file_string = open("/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/14372265-1.p12", "rb").read()
         cls.firma = cls.env['sii.firma'].create({
-            'name': 'jsanhueza.p12',
+            'name': '14372265-1.p12',
             'file_content': base64.encodestring(file_string),
-            'password': '72918346'
+            'password': 'js72918346'
         })
         # Validate signature
         cls.firma.action_process()
