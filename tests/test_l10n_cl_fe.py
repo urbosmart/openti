@@ -14,7 +14,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
     def setUpClass(cls):
         super(Test_l10n_cl_fe, cls).setUpClass()
         cls.number = {
-            'boleta':123,
+            'boleta':151,
             'factura_compra':62,
             'factura_electronica':197,
             'guia_despacho':97,
@@ -22,23 +22,27 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         # Creacion de firma electronica
         cls.folios = {
             '39':{
-                'file': 'FoliosSII7632375239101202010291227.xml',
-                'location':'/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/BoletaElectronica/101-150/'
+                'file': 'FoliosSII76323752391512021221637.xml',
+                'location':'./libs/facturacion_electronica/fac_files/Folios/BoletaElectronica/151-250/'
             },
             '33': {
                 'file': 'FoliosSII763237523319720201121333.xml',
-                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/FacturaElectronica/197-209/'
+                'location': './libs/facturacion_electronica/fac_files/Folios/FacturaElectronica/197-209/'
             },
             '52': {
                 'file': 'FoliosSII763237525281202010291230.xml',
-                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
+                'location': './libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
             },
             '46':{
                 'file': 'FoliosSII763237524661202011191529.xml',
-                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
+                'location': './libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
+            },
+            '61':{
+                'file':'',
+                'location':''
             }
         }
-        file_string = open("/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/14372265-1.p12", "rb").read()
+        file_string = open("./libs/facturacion_electronica/fac_files/14372265-1.p12", "rb").read()
         cls.firma = cls.env['sii.firma'].create({
             'name': '14372265-1.p12',
             'file_content': base64.encodestring(file_string),
@@ -428,8 +432,8 @@ class Test_l10n_cl_fe(SingleTransactionCase):
     def test_validate_signature2(self):
         self.assertEqual(self.firma.state, 'valid')
     """
-    """
-    def test_enviar_39(self):
+    
+    def test_j_enviar_39(self):
         self.pos_order_0.do_dte_send()
 
         context_payment = {'active_ids':[self.pos_config.id],'active_id': self.pos_order_0.id}
@@ -440,8 +444,8 @@ class Test_l10n_cl_fe(SingleTransactionCase):
 
 
         self.pos_order_0.picking_id.do_dte_send()
+    
     """
-
     def test_enviar_46(self):
         self.document_class_46 = self.env['account.journal.sii_document_class'].create({
             'journal_id': self.journal_46.id,
@@ -476,9 +480,11 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         self.sequence_46.dte_caf_ids[0].load_caf()
         self.invoice_46.action_invoice_open()
         self.invoice_46.do_dte_send_invoice()
-
-#    def test_cola(self):
-        while self.env['sii.cola_envio'].search([]):
+    """
+    def test_y_cola(self):
+        count = 0
+        while self.env['sii.cola_envio'].search([]) and count < 1000:
+            count +=1
             _logger.warning("Enviando ...")
             for elem in self.env['sii.cola_envio'].search([]):
                 _logger.warning(elem.model)
@@ -490,5 +496,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             self.env['sii.cola_envio']._cron_procesar_cola()
 
 
-    def test_get_pos_order_status(self):
-        self.pos_order_0._get_dte_status()
+    def test_z_get_pos_order_status(self):
+        self.pos_order_0.ask_for_dte_status()
+        result = self.pos_order_0.sii_xml_request.sii_receipt
+        _logger.warning(result)
