@@ -917,7 +917,7 @@
 
                 <div class="row">
                   <div class="col-12" >
-                     <img class="img-fluid" t-att-src="'data:image/png;base64,%s' % to_text(o.sii_barcode_img)" class="invoice_barcode"/>
+                     <img t-att-src="'data:image/png;base64,%s' % to_text(o.sii_barcode_img)" class="img-fluid invoice_barcode"/>
                   </div>
 		</div>
 		<div class="row">
