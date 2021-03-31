@@ -740,15 +740,6 @@
       </t>
   </template>
 
-  <template id="dte_invoice_con_pagos2" inherit_id="account.report_invoice_with_payments">
-      <t t-call="web.html_container" position="replace">
-        <t t-call="web.html_container">
-          <t t-foreach="docs" t-as="o">
-	    <t t-call="openti.report_ticket" t-lang="'es_CL'"/>  
-          </t>
-        </t>
-      </t>
-  </template>
 
   <template id="dte_invoice_con_pagos" inherit_id="account.report_invoice_with_payments">
       <t t-call="web.html_container" position="replace">
@@ -775,18 +766,19 @@
     <t t-call="openti.dte_invoice_con_pagos" />
     <t t-call="openti.invoice_cedible" />
   </template>
-
+  
 <report id="action_print_ticket"
 	model="account.invoice"
 	report_type="qweb-pdf"
-	string="Imprimir ticket"
+	string="Imprimir Ticket"
 	menu="True"
-	name="openti.dte_invoice_con_pagos2"
-	file="openti.dte_invoice_con_pagos2"
+	name="openti.dte_invoice_con_pagos"
+	file="openti.dte_invoice_con_pagos"
 	paperformat="l10n_cl_dte_point_of_sale.paperformat_pos_boleta_ticket"
 	print_report_name="(object._get_printed_report_name())"
-	attachment_use="True"
+	attachment_use="False"
     attachment="'%s.pdf' % (object._get_printed_report_name())" />
+  
 
   <report
             string="Print Cedible"
@@ -818,7 +810,7 @@
             <div class="page">
 		<div class="row">
 		    <div class="col-12 text-center">
-			<img class="img-fluid" t-att-src="'data:image/png;base64,%s' % o.sii_header()"/>
+			<img class="img-fluid" style="max-width:100%;height:auto;" t-att-src="'data:image/png;base64,%s' % o.sii_header()"/>
                     </div>
 		</div>
 		<div class="row">
@@ -826,9 +818,13 @@
                         <h2><span t-esc="o.company_id.partner_id.name"/> </h2>
                         <h3> <span t-esc="o.company_id.partner_id.document_number"/></h3>
                     </div>
-                    <div class="col-xs-12 text-center">
+		</div>
+		<div class="row">
+		    <div class="col-xs-12 text-center">
                         <h4 t-field="o.company_id.activity_description"/>
                     </div>
+		</div>
+		<div class="row">
                     <div class="col-xs-12 text-center">
                         <h4> <span t-esc="o.company_id.partner_id.street"/> <span t-esc="o.company_id.partner_id.city"/></h4>
                     </div>
@@ -916,8 +912,8 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-12" >
-                     <img t-att-src="'data:image/png;base64,%s' % to_text(o.sii_barcode_img)" class="img-fluid invoice_barcode"/>
+                  <div class="col-12 text-center">
+                     <img class="img-fluid invoice_barcode" style="max-width:100%;height:auto;" t-att-src="'data:image/png;base64,%s' % to_text(o.sii_barcode_img)"/>
                   </div>
 		</div>
 		<div class="row">
