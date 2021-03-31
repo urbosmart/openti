@@ -740,6 +740,15 @@
       </t>
   </template>
 
+      <template id="dte_invoice_con_pagos_ticket" inherit_id="account.report_invoice_with_payments">
+      <t t-call="web.html_container" position="replace">
+        <t t-call="web.html_container">
+          <t t-foreach="docs" t-as="o">
+            <t t-call="openti.report_ticket" t-lang="'es_CL'"/>
+          </t>
+        </t>
+      </t>
+  </template>
 
   <template id="dte_invoice_con_pagos" inherit_id="account.report_invoice_with_payments">
       <t t-call="web.html_container" position="replace">
@@ -772,8 +781,8 @@
 	report_type="qweb-pdf"
 	string="Imprimir Ticket"
 	menu="True"
-	name="openti.dte_invoice_con_pagos"
-	file="openti.dte_invoice_con_pagos"
+	name="openti.dte_invoice_con_pagos_ticket"
+	file="openti.dte_invoice_con_pagos_ticket"
 	paperformat="l10n_cl_dte_point_of_sale.paperformat_pos_boleta_ticket"
 	print_report_name="(object._get_printed_report_name())"
 	attachment_use="False"
