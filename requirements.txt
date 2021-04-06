@@ -15,3 +15,4 @@ payflow
 pykhipu
 #dependency of module website_form_builder
 openupgradelib
+mx==3.2
