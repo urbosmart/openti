@@ -25,7 +25,7 @@
 	<field name="chart_template_id" ref="cl_chart_template_openti" />
     </record>
 	
-	<record id="110201" model="account.account.template">
+	<record id="110203" model="account.account.template">
 	<field name="name">Fondos Mutuos2</field>
 	<field name="code">110203</field>
 	<field name="reconcile" eval="False" />
