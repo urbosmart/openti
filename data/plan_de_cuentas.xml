@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="cl_chart_template_openti" model="account.chart.template">
+	<field name="name">Chile - Plan de Openti</field>
+	<field name="currency_id" ref="base.CLP" />
+	<field name="bank_account_code_prefix">11013</field>
+	<field name="cash_account_code_prefix">11012</field>
+	<field name="transfer_account_code_prefix">118000</field>
+	<field name="use_anglo_saxon" eval="True" />
+    </record> 
+
+    <record id="110201" model="account.account.template">
+	<field name="name">Fondos Mutuos</field>
+	<field name="code">110201</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+
+    <record id="110201" model="account.account.template">
+	<field name="name">Fondos Mutuos2</field>
+	<field name="code">110203</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+</odoo>

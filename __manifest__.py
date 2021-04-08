@@ -32,6 +32,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/inherit_report_paperformat.xml',
+        'data/plan_de_cuentas.xml',
         # 'data/promotion_modules.xml',
         # 'demo/payment_cron.xml',
         # 'demo/default_barcode_patterns.xml',
