@@ -9,25 +9,946 @@
 	<field name="use_anglo_saxon" eval="True" />
     </record> 
 
-    <record id="110201" model="account.account.template">
-	<field name="name">Fondos Mutuos</field>
-	<field name="code">110201</field>
+    <record id="100000" model="account.account.template">
+	<field name="name">ACTIVO</field>
+	<field name="code">100000</field>
 	<field name="reconcile" eval="False" />
 	<field ref="account.data_account_type_current_assets" name="user_type_id" />
 	<field name="chart_template_id" ref="cl_chart_template_openti" />
     </record>
 
-    <record id="110201" model="account.account.template">
-	<field name="name">Fondos Mutuos2</field>
-	<field name="code">110203</field>
+    <record id="110000" model="account.account.template">
+	<field name="name">ACTIVO CIRCULANTE</field>
+	<field name="code">110000</field>
 	<field name="reconcile" eval="False" />
 	<field ref="account.data_account_type_current_assets" name="user_type_id" />
 	<field name="chart_template_id" ref="cl_chart_template_openti" />
     </record>
 	
-	<record id="110203" model="account.account.template">
-	<field name="name">Fondos Mutuos2</field>
+	<record id="'110100" model="account.account.template">
+	<field name="name">DISPONIBLE</field>
+	<field name="code">110100</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110101" model="account.account.template">
+	<field name="name">CAJA</field>
+	<field name="code">110101</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110102" model="account.account.template">
+	<field name="name">FONDO FIJO ADMINISTRACION</field>
+	<field name="code">110102</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110103" model="account.account.template">
+	<field name="name">FONDO FIJO VENTAS</field>
+	<field name="code">110103</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110200" model="account.account.template">
+	<field name="name">BANCOS NACIONALES</field>
+	<field name="code">110200</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110201" model="account.account.template">
+	<field name="name">BANCO BICE</field>
+	<field name="code">110201</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110202" model="account.account.template">
+	<field name="name">BANCO ESTADO</field>
+	<field name="code">110202</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110203" model="account.account.template">
+	<field name="name">BANCO SANTANDER</field>
 	<field name="code">110203</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110300" model="account.account.template">
+	<field name="name">VALORES NEGOCIABLES</field>
+	<field name="code">110300</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110301" model="account.account.template">
+	<field name="name">DEPOSITOS A PLAZO</field>
+	<field name="code">110301</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110302" model="account.account.template">
+	<field name="name">FONDOS MUTUOS</field>
+	<field name="code">110302</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110303" model="account.account.template">
+	<field name="name">INVERSIÓN EN EMPRESAS RELACIONADAS</field>
+	<field name="code">110303</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110304" model="account.account.template">
+	<field name="name">ACCIONES</field>
+	<field name="code">110304</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110305" model="account.account.template">
+	<field name="name">ACCIONES SUSCRITAS</field>
+	<field name="code">110305</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110400" model="account.account.template">
+	<field name="name">DEUDORES POR VENTA</field>
+	<field name="code">110400</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110401" model="account.account.template">
+	<field name="name">CLIENTES</field>
+	<field name="code">110401</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110402" model="account.account.template">
+	<field name="name">CLIENTES INCOBRABLES</field>
+	<field name="code">110402</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110403" model="account.account.template">
+	<field name="name">CLIENTE BOLETA</field>
+	<field name="code">110403</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110500" model="account.account.template">
+	<field name="name">DOCUMENTOS POR COBRAR</field>
+	<field name="code">110500</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110501" model="account.account.template">
+	<field name="name">CHEQUES EN CARTERA</field>
+	<field name="code">110501</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110502" model="account.account.template">
+	<field name="name">DEUDORES VARIOS</field>
+	<field name="code">110502</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110503" model="account.account.template">
+	<field name="name">SEGUROS POR COBRAR</field>
+	<field name="code">110503</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110504" model="account.account.template">
+	<field name="name">MUTUO POR COBRAR</field>
+	<field name="code">110504</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110505" model="account.account.template">
+	<field name="name">DOCUMENTOS POR COBRAR</field>
+	<field name="code">110505</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110506" model="account.account.template">
+	<field name="name">CUENTA CORRIENTE MERCANTIL POR COBRAR</field>
+	<field name="code">110506</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110600" model="account.account.template">
+	<field name="name">DOCUMENTOS EN GARANTIA</field>
+	<field name="code">110600</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110601" model="account.account.template">
+	<field name="name">BOLETA EN GARANTIA LINEA CREDITO</field>
+	<field name="code">110601</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110602" model="account.account.template">
+	<field name="name">GARANTIA ARRIENDO</field>
+	<field name="code">110602</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110700" model="account.account.template">
+	<field name="name">EXISTENCIAS</field>
+	<field name="code">110700</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110701" model="account.account.template">
+	<field name="name">MERCADERIAS</field>
+	<field name="code">110701</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110702" model="account.account.template">
+	<field name="name">MERCADERIAS DE IMPORTACION</field>
+	<field name="code">110702</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110703" model="account.account.template">
+	<field name="name">IMPORTACION EN TRANSITO</field>
+	<field name="code">110703</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110800" model="account.account.template">
+	<field name="name">IMPUESTOS POR RECUPERAR</field>
+	<field name="code">110800</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110801" model="account.account.template">
+	<field name="name">IVA CREDITO FISCAL</field>
+	<field name="code">110801</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110802" model="account.account.template">
+	<field name="name">PAGOS PROV. MENSUALES</field>
+	<field name="code">110802</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110803" model="account.account.template">
+	<field name="name">CREDITO 33 BIS</field>
+	<field name="code">110803</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110804" model="account.account.template">
+	<field name="name">CREDITO POR CAPACITACION</field>
+	<field name="code">110804</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110805" model="account.account.template">
+	<field name="name">IVA POR ACTIVO FIJO</field>
+	<field name="code">110805</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110806" model="account.account.template">
+	<field name="name">ASIGNACION FAMILIAR</field>
+	<field name="code">110806</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110807" model="account.account.template">
+	<field name="name">IMPUESTOS POR RECUPERAR</field>
+	<field name="code">110807</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110900" model="account.account.template">
+	<field name="name">CUENTA PARTICULAR</field>
+	<field name="code">110900</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110901" model="account.account.template">
+	<field name="name">CTA. PART. DANIEL JIMENEZ</field>
+	<field name="code">110901</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110902" model="account.account.template">
+	<field name="name">CTA. PART. JIMENA SANHUEZA</field>
+	<field name="code">110902</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110903" model="account.account.template">
+	<field name="name">DIVIDENDO PROVISORIO MCR</field>
+	<field name="code">110903</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="110904" model="account.account.template">
+	<field name="name">DIVIDENDO PROVISORIO</field>
+	<field name="code">110904</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111000" model="account.account.template">
+	<field name="name">CTA. CTE. EMPRESAS RELACIONADAS</field>
+	<field name="code">111000</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111100" model="account.account.template">
+	<field name="name">DEUDORES VARIOS</field>
+	<field name="code">111100</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111101" model="account.account.template">
+	<field name="name">ANTICIPOS PERSONAL</field>
+	<field name="code">111101</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111102" model="account.account.template">
+	<field name="name">ANTICIPO HONORARIOS</field>
+	<field name="code">111102</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111103" model="account.account.template">
+	<field name="name">PRESTAMO EMPLEADOS</field>
+	<field name="code">111103</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111104" model="account.account.template">
+	<field name="name">ANTICIPO AGENTE ADUANA</field>
+	<field name="code">111104</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111105" model="account.account.template">
+	<field name="name">ANTICIPO ARRIENDO</field>
+	<field name="code">111105</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111106" model="account.account.template">
+	<field name="name">ANTICIPO PROVEEDORES</field>
+	<field name="code">111106</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="111107" model="account.account.template">
+	<field name="name">APORTE DE CAPACITACION</field>
+	<field name="code">111107</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120000" model="account.account.template">
+	<field name="name">ACTIVO FIJO</field>
+	<field name="code">120000</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120100" model="account.account.template">
+	<field name="name">MAQUINAS Y EQUIPOS</field>
+	<field name="code">120100</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120101" model="account.account.template">
+	<field name="name">EQUIPOS COMPUTACIONALES</field>
+	<field name="code">120101</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120102" model="account.account.template">
+	<field name="name">INFRAESTRUCTURA Y EQUIPOS</field>
+	<field name="code">120102</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120103" model="account.account.template">
+	<field name="name">MAQUINARIA Y EQUIPOS</field>
+	<field name="code">120103</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120200" model="account.account.template">
+	<field name="name">DEPREC. ACUM. MAQ. Y EQUIPOS</field>
+	<field name="code">120200</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120201" model="account.account.template">
+	<field name="name">DEPREC. ACUM. EQUIPOS COMPUT.</field>
+	<field name="code">120201</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120202" model="account.account.template">
+	<field name="name">DEPREC. ACUM. INFRAEST. Y EQUIPOS</field>
+	<field name="code">120202</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120203" model="account.account.template">
+	<field name="name">DEPREC. ACUM. MAQUINARIA Y EQUIPOS</field>
+	<field name="code">120203</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120300" model="account.account.template">
+	<field name="name">MUEBLES Y UTILES</field>
+	<field name="code">120300</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120400" model="account.account.template">
+	<field name="name">DEPREC. ACUM. MUEBLES Y UTILES</field>
+	<field name="code">120400</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120401" model="account.account.template">
+	<field name="name">DEPREC. ACUM. MUEBLES Y UTILES</field>
+	<field name="code">120401</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120500" model="account.account.template">
+	<field name="name">VEHICULOS</field>
+	<field name="code">120500</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120501" model="account.account.template">
+	<field name="name">VEHICULOS</field>
+	<field name="code">120501</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120600" model="account.account.template">
+	<field name="name">DEPREC. ACUM. VEHICULOS</field>
+	<field name="code">120600</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120601" model="account.account.template">
+	<field name="name">DEPREC. ACUM. VEHICULOS</field>
+	<field name="code">120601</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120700" model="account.account.template">
+	<field name="name">BIEN RAÍZ</field>
+	<field name="code">120700</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120701" model="account.account.template">
+	<field name="name">OFICINAS</field>
+	<field name="code">120701</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120702" model="account.account.template">
+	<field name="name">ESTACIONAMIENTOS</field>
+	<field name="code">120702</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120703" model="account.account.template">
+	<field name="name">BODEGAS</field>
+	<field name="code">120703</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120800" model="account.account.template">
+	<field name="name">DEPREC. ACUM. BIEN RAIZ</field>
+	<field name="code">120800</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120801" model="account.account.template">
+	<field name="name">DEPREC. ACUM. OFICINAS</field>
+	<field name="code">120801</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120802" model="account.account.template">
+	<field name="name">DEPREC. ACUM. ESTACIONAMIENTOS</field>
+	<field name="code">120802</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="120803" model="account.account.template">
+	<field name="name">DEPREC. ACUM. BODEGAS</field>
+	<field name="code">120803</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="130000" model="account.account.template">
+	<field name="name">OTROS ACTIVOS</field>
+	<field name="code">130000</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="130100" model="account.account.template">
+	<field name="name">OTROS ACTIVOS</field>
+	<field name="code">130100</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="130101" model="account.account.template">
+	<field name="name">DERECHOS Y CERTIFICACIONES</field>
+	<field name="code">130101</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="130102" model="account.account.template">
+	<field name="name">INTERESES DIFERIDOS C/PLAZO</field>
+	<field name="code">130102</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="130103" model="account.account.template">
+	<field name="name">INTERESES DIFERIDOS L/PLAZO</field>
+	<field name="code">130103</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="200000" model="account.account.template">
+	<field name="name">PASIVO</field>
+	<field name="code">200000</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210000" model="account.account.template">
+	<field name="name">PASIVO CIRCULANTE</field>
+	<field name="code">210000</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210100" model="account.account.template">
+	<field name="name">OBLIG./ CON BANCOS Y FINANCIERAS</field>
+	<field name="code">210100</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210101" model="account.account.template">
+	<field name="name">PRESTAMO BCO. SANTANDER C/P</field>
+	<field name="code">210101</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210102" model="account.account.template">
+	<field name="name">PRESTAMO BCO. BICE C/P</field>
+	<field name="code">210102</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210103" model="account.account.template">
+	<field name="name">OBLIGACIONES POR LEASING</field>
+	<field name="code">210103</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210104" model="account.account.template">
+	<field name="name">INTERES DIFERIDO MUTUO</field>
+	<field name="code">210104</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210105" model="account.account.template">
+	<field name="name">PRESTAMO INVERSIONES MC LTDA</field>
+	<field name="code">210105</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210106" model="account.account.template">
+	<field name="name">CUENTA CORRIENTE MERCANTIL POR PAGA</field>
+	<field name="code">210106</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210200" model="account.account.template">
+	<field name="name">LINEAS DE CREDITO</field>
+	<field name="code">210200</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210201" model="account.account.template">
+	<field name="name">LINEA SOBREG. BANCO</field>
+	<field name="code">210201</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210300" model="account.account.template">
+	<field name="name">CUENTAS POR PAGAR</field>
+	<field name="code">210300</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210301" model="account.account.template">
+	<field name="name">PROVEEDORES NACIONALES</field>
+	<field name="code">210301</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210302" model="account.account.template">
+	<field name="name">FACTURAS PENDIENTES PROVEED</field>
+	<field name="code">210302</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210303" model="account.account.template">
+	<field name="name">EMPRESAS RELAC. POR PAGAR</field>
+	<field name="code">210303</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210304" model="account.account.template">
+	<field name="name">CHEQUES PEND. COBRO</field>
+	<field name="code">210304</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210305" model="account.account.template">
+	<field name="name">ACREEDORES VARIOS</field>
+	<field name="code">210305</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210306" model="account.account.template">
+	<field name="name">BOLETAS EN GARANTIA</field>
+	<field name="code">210306</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210307" model="account.account.template">
+	<field name="name">BOLETA EN GARANTIA L. DE CREDITO</field>
+	<field name="code">210307</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210308" model="account.account.template">
+	<field name="name">ANTICIPO CLIENTES</field>
+	<field name="code">210308</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210400" model="account.account.template">
+	<field name="name">IMPUESTOS POR PAGAR</field>
+	<field name="code">210400</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210401" model="account.account.template">
+	<field name="name">IVA DEBITO FISCAL</field>
+	<field name="code">210401</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210402" model="account.account.template">
+	<field name="name">PPM POR PAGAR</field>
+	<field name="code">210402</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    
+    <record id="210403" model="account.account.template">
+	<field name="name">IMPUESTOS RETENIDOS</field>
+	<field name="code">210403</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210404" model="account.account.template">
+	<field name="name">IMPUESTO UNICO</field>
+	<field name="code">210404</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210405" model="account.account.template">
+	<field name="name">RETENCION DE IMPUESTO</field>
+	<field name="code">210405</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210406" model="account.account.template">
+	<field name="name">PPM VOLUNTARIO POR PAGAR</field>
+	<field name="code">210406</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210500" model="account.account.template">
+	<field name="name">RETENCIONES</field>
+	<field name="code">210500</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210501" model="account.account.template">
+	<field name="name">SUELDOS POR PAGAR</field>
+	<field name="code">210501</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210502" model="account.account.template">
+	<field name="name">HONORARIOS POR PAGAR</field>
+	<field name="code">210502</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210503" model="account.account.template">
+	<field name="name">AFP POR PAGAR</field>
+	<field name="code">210503</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210504" model="account.account.template">
+	<field name="name">AFC POR PAGAR</field>
+	<field name="code">210504</field>
+	<field name="reconcile" eval="False" />
+	<field ref="account.data_account_type_current_assets" name="user_type_id" />
+	<field name="chart_template_id" ref="cl_chart_template_openti" />
+    </record>
+    
+    <record id="210505" model="account.account.template">
+	<field name="name">IPS POR PAGAR</field>
+	<field name="code">210505</field>
 	<field name="reconcile" eval="False" />
 	<field ref="account.data_account_type_current_assets" name="user_type_id" />
 	<field name="chart_template_id" ref="cl_chart_template_openti" />
