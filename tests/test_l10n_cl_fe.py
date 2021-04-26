@@ -496,8 +496,9 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
             self.env['sii.cola_envio']._cron_procesar_cola()
 
-
+    """
     def test_z_get_pos_order_status(self):
         self.pos_order_0.ask_for_dte_status()
         result = self.pos_order_0.sii_xml_request.sii_receipt
         _logger.warning(result)
+    """
