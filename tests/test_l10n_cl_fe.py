@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ -*- coding: utf-8 -*-
 from odoo.tests.common import SingleTransactionCase, tagged
 import logging
 import base64
@@ -153,7 +153,6 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         })
         # Write and Create Journal
         cls.journal = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
-        import pdb; pdb.set_trace()
 
         cls.document_class = cls.env['account.journal.sii_document_class'].create({
             'journal_id': cls.journal.id,
