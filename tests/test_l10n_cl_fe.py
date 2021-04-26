@@ -1,4 +1,4 @@
- -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from odoo.tests.common import SingleTransactionCase, tagged
 import logging
 import base64
