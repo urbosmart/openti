@@ -432,7 +432,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
     def test_validate_signature2(self):
         self.assertEqual(self.firma.state, 'valid')
     """
-    
+    """
     def test_j_enviar_39(self):
         self.pos_order_0.do_dte_send()
 
@@ -444,7 +444,8 @@ class Test_l10n_cl_fe(SingleTransactionCase):
 
 
         self.pos_order_0.picking_id.do_dte_send()
-    
+    """
+    #####
     """
     def test_enviar_46(self):
         self.document_class_46 = self.env['account.journal.sii_document_class'].create({
