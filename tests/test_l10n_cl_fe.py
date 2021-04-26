@@ -23,26 +23,26 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         cls.folios = {
             '39':{
                 'file': 'FoliosSII76323752391512021221637.xml',
-                'location':'./libs/facturacion_electronica/fac_files/Folios/BoletaElectronica/151-250/'
+                'location':'/mnt/extra-addons/libs/facturacion_electronica/fac_files/Folios/BoletaElectronica/151-250/'
             },
             '33': {
                 'file': 'FoliosSII763237523319720201121333.xml',
-                'location': './libs/facturacion_electronica/fac_files/Folios/FacturaElectronica/197-209/'
+                'location': '/mnt/extra-addons/libs/facturacion_electronica/fac_files/Folios/FacturaElectronica/197-209/'
             },
             '52': {
                 'file': 'FoliosSII763237525281202010291230.xml',
-                'location': './libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
+                'location': '/mnt/extra-addons/libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
             },
             '46':{
                 'file': 'FoliosSII763237524661202011191529.xml',
-                'location': './libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
+                'location': '/mnt/extra-addons/libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
             },
             '61':{
                 'file':'',
                 'location':''
             }
         }
-        file_string = open("./libs/facturacion_electronica/fac_files/14372265-1.p12", "rb").read()
+        file_string = open("/mnt/extra-addons/libs/facturacion_electronica/fac_files/14372265-1.p12", "rb").read()
         cls.firma = cls.env['sii.firma'].create({
             'name': '14372265-1.p12',
             'file_content': base64.encodestring(file_string),
@@ -153,6 +153,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         })
         # Write and Create Journal
         cls.journal = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
+        import pdb; pdb.set_trace()
 
         cls.document_class = cls.env['account.journal.sii_document_class'].create({
             'journal_id': cls.journal.id,
