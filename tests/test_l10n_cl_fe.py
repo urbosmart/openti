@@ -4,7 +4,6 @@ import logging
 import base64
 import datetime
 import time
-
 _logger = logging.getLogger(__name__)
 
 @tagged("tecnopti")
@@ -23,22 +22,22 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         cls.folios = {
             '39':{
                 'file': 'FoliosSII7632375239101202010291227.xml',
-                'location':'/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/BoletaElectronica/101-150/'
+                'location':'./libs/facturacion_electronica/fac_files/Folios/BoletaElectronica/101-150/'
             },
             '33': {
                 'file': 'FoliosSII763237523319720201121333.xml',
-                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/FacturaElectronica/197-209/'
+                'location': './libs/facturacion_electronica/fac_files/Folios/FacturaElectronica/197-209/'
             },
             '52': {
                 'file': 'FoliosSII763237525281202010291230.xml',
-                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
+                'location': './libs/facturacion_electronica/fac_files/Folios/GuiaDespacho/81-130/'
             },
             '46':{
                 'file': 'FoliosSII763237524661202011191529.xml',
-                'location': '/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
+                'location': './libs/facturacion_electronica/fac_files/Folios/FacturaCompra/61-120/'
             }
         }
-        file_string = open("/home/abiezer/PycharmProjects/openti_image/libs/facturacion_electronica/fac_files/14372265-1.p12", "rb").read()
+        file_string = open("./libs/facturacion_electronica/fac_files/14372265-1.p12", "rb").read()
         cls.firma = cls.env['sii.firma'].create({
             'name': '14372265-1.p12',
             'file_content': base64.encodestring(file_string),
@@ -170,7 +169,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         ##################### Document 46 (Factura de Compra Electronica) #####################
         #######################################################################################
 
-        cls.journal_46 = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
+        #cls.journal_46 = cls.env['account.journal'].search([('name', '=', 'Facturas de cliente')])
         
 
 
@@ -178,6 +177,8 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         #######################################################################################
         #######################################################################################
         # Create Customer
+
+        import pdb; pdb.set_trace()
         cls.customer = cls.env['res.partner'].create({
             'name': 'Abiezer',
             'street': 'Tucapel 50',
@@ -197,13 +198,14 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             ])],
             'email': 'jsifontes@openti.cl',
             'phone': '954968318',
-            'vat': 'CL263613961',
+#            'vat': 'CL263613961',
         })
         ####################################################################################################################
         ####################################################################################################################
         ####################################################################################################################
         ####################################################################################################################
         ####################################################################################################################
+        """
         cls.sequence_boleta = cls.env['ir.sequence'].create({
             'name': 'Boleta Electronica(Tests)',
             'implementation': 'no_gap',
@@ -388,7 +390,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
 
         # I click on the validate button to register the payment.
 
-
+        """
         ############################################################################################################
         ############################################################################################################
         ############################################################################################################
@@ -416,14 +418,14 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             'invoice_line_tax_ids': [(6, 0, [cls.env.ref('l10n_cl_chart_of_account.1_IVAV_19').id])],
             'price_subtotal':50000,
         })
-    """
+    
     def test_enviar_33(self):
         # Envio 33
         self.sequence.get_caf_files(self.number['factura_electronica'])
         self.sequence.dte_caf_ids[0].load_caf()
         self.invoice.action_invoice_open()
         self.invoice.do_dte_send_invoice()
-    """
+    
     """
     def test_validate_signature2(self):
         self.assertEqual(self.firma.state, 'valid')
@@ -441,7 +443,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
 
         self.pos_order_0.picking_id.do_dte_send()
     """
-
+    """
     def test_enviar_46(self):
         self.document_class_46 = self.env['account.journal.sii_document_class'].create({
             'journal_id': self.journal_46.id,
@@ -476,8 +478,8 @@ class Test_l10n_cl_fe(SingleTransactionCase):
         self.sequence_46.dte_caf_ids[0].load_caf()
         self.invoice_46.action_invoice_open()
         self.invoice_46.do_dte_send_invoice()
-
-#    def test_cola(self):
+    """
+    def test_10_cola(self):
         while self.env['sii.cola_envio'].search([]):
             _logger.warning("Enviando ...")
             for elem in self.env['sii.cola_envio'].search([]):
@@ -489,6 +491,7 @@ class Test_l10n_cl_fe(SingleTransactionCase):
             _logger.warning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~4")
             self.env['sii.cola_envio']._cron_procesar_cola()
 
-
+    """
     def test_get_pos_order_status(self):
         self.pos_order_0._get_dte_status()
+    """
