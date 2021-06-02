@@ -5,7 +5,7 @@ py-wsse
 dicttoxml
 pysftp==0.2.8
 suds-jurko
-urllib3==1.25.10
+urllib3==1.26.5
 num2words
 xlsxwriter
 pillow
